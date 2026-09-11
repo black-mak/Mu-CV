@@ -26,6 +26,9 @@ export const profile = {
   phone: "+20 100 246 2821",
   phoneRaw: "+201002462821",
   whatsapp: "https://wa.me/201002462821",
+  instapay: "+20 111 698 7764",
+  cvPdf: "/cv/muhamed-alaa-cv.pdf",
+  vcf: "/muhamed-alaa.vcf",
 };
 
 // Punchy hero copy — echoes the studio's brand voice ("Marks with meaning").
@@ -33,12 +36,12 @@ export const hero = {
   kicker: { en: "BLACK-MAK® / CURRICULUM VITÆ — 2026", ar: "BLACK-MAK® / السيرة الذاتية — ٢٠٢٦" },
   lead: {
     en: "I turn what a business stands for into an identity people recognize, remember, and",
-    ar: "أُحوّل ما يقف وراءه النشاط التجاري إلى هوية",
+    ar: "أُحوّل ما تعبّر عنه علامتك إلى هوية",
   },
-  outline: { en: "trust.", ar: "يتعرّف بها الناس، ويتذكّرونها، ويثقون بها." },
+  outline: { en: "trust.", ar: "يثق بها الناس." },
   sub: {
-    en: "Specialized in identity systems, freestyle calligraphy, and real-world brand applications.",
-    ar: "متخصص في أنظمة الهوية والكاليجرافي الحر وتطبيقات العلامة الواقعية.",
+    en: "Specialized in building logos, visual identity systems, typography, and freestyle calligraphy.",
+    ar: "متخصص في بناء الشعارات وأنظمة الهوية البصرية والتايبوغرافي والكاليجرافي الحر.",
   },
 };
 
@@ -59,8 +62,8 @@ export const about = {
     ar: "أنا <strong>محمد علاء</strong> — مصمم شعارات وهوية بصرية، ومدير إبداعي، واستراتيجي علامات تجارية، أُدير BLACK-MAK® من مصر وأعمل حول العالم. لأكثر من عقد، ساعدت الأعمال على ترجمة هويتها إلى علاماتٍ تعمل بأي حجم، وبأي لغة، وعلى أي سطح.",
   },
   p2: {
-    en: "The work spans freestyle calligraphy, full identity systems, applied print and outdoor advertising. An AI-augmented workflow speeds exploration — while strategy, art direction, calligraphy, and final design decisions remain human-led. Every project starts with one question: what should this mark make people feel?",
-    ar: "يمتد العمل من الكاليجرافي الحر إلى أنظمة الهوية الكاملة والمطبوعات واللوحات الخارجية. سير عمل معزَّز بالذكاء الاصطناعي يسرّع الاستكشاف — بينما تبقى الاستراتيجية والإدارة الفنية والكاليجرافي وقرارات التصميم النهائية بقيادة بشرية. كل مشروع يبدأ بسؤالٍ واحد: بماذا يجب أن تُشعر هذه العلامة الناس؟",
+    en: "The work spans freestyle calligraphy, full identity systems, applied print and outdoor advertising. Strategy, art direction, calligraphy, and final design decisions are always human-led. Every project starts with one question: what should this mark make people feel?",
+    ar: "يمتد العمل من الكاليجرافي الحر إلى أنظمة الهوية الكاملة والمطبوعات واللوحات الخارجية. الاستراتيجية والإدارة الفنية والكاليجرافي وقرارات التصميم النهائية بقيادة بشرية دائمًا. كل مشروع يبدأ بسؤالٍ واحد: بماذا يجب أن تُشعر هذه العلامة الناس؟",
   },
   facts: {
     based: { en: "Based in", ar: "المقر" },
@@ -84,7 +87,7 @@ export type Job = {
 
 export const experience: Job[] = [
   {
-    from: "2018",
+    from: "2014",
     to: { en: "Present", ar: "الآن" },
     role: { en: "Logo & Visual Identity Designer", ar: "مصمم شعارات وهوية بصرية" },
     org: { en: "BLACK-MAK® · Independent Design Practice", ar: "BLACK-MAK® · ممارسة تصميم مستقلة" },
@@ -92,12 +95,12 @@ export const experience: Job[] = [
     tag: { en: "Lead · Studio", ar: "قائد · استوديو" },
     bullets: [
       {
-        en: "Design brand identities and visual systems for clients across industries, blending 12+ years of craft with an AI-augmented creative workflow.",
-        ar: "أُصمم هويات بصرية وأنظمة متكاملة لعملاء في قطاعات متنوعة، بمزجٍ بين خبرة تتجاوز ١٢ عامًا وسير عمل إبداعي معزَّز بالذكاء الاصطناعي.",
+        en: "Design brand identities and visual systems for clients across industries, backed by 12+ years of craft.",
+        ar: "أُصمم هويات بصرية وأنظمة متكاملة لعملاء في قطاعات متنوعة، بخبرة تتجاوز ١٢ عامًا.",
       },
       {
-        en: "Built on long-term client relationships, repeat work, and referrals.",
-        ar: "مبني على علاقات عملاء طويلة الأمد وعمل متكرر وإحالات.",
+        en: "Practice established in 2014 and built on long-term client relationships, repeat work, and referrals.",
+        ar: "ممارسة تأسست عام ٢٠١٤، مبنية على علاقات عملاء طويلة الأمد وعمل متكرر وإحالات.",
       },
       {
         en: "Delivered 50+ logos and identity systems — see selected work in the studio.",
@@ -186,8 +189,6 @@ export const skills: SkillGroup[] = [
       { name: { en: "Logo Design", ar: "تصميم الشعار" } },
       { name: { en: "Visual Identity Systems", ar: "أنظمة الهوية البصرية" } },
       { name: { en: "Calligraphy & Wordmarks", ar: "الكاليجرافي والكلمات الشعارية" } },
-      { name: { en: "Arabic Calligraphy", ar: "الكاليجرافي العربي" } },
-      { name: { en: "Latin Calligraphy", ar: "الكاليجرافي اللاتيني" } },
       { name: { en: "Brand Art Direction", ar: "الإدارة الفنية للعلامة" } },
       { name: { en: "Signage & Real-world Applications", ar: "اللوحات والتطبيقات الواقعية" } },
       { name: { en: "Digital Brand Experiences", ar: "التجارب الرقمية للعلامة" } },
@@ -199,6 +200,7 @@ export const skills: SkillGroup[] = [
       { name: { en: "Research & Discovery", ar: "البحث والاكتشاف" } },
       { name: { en: "Concept & Sketching", ar: "الفكرة والرسم الأولي" } },
       { name: { en: "File & Guideline Delivery", ar: "تسليم الملفات والدليل" } },
+      { name: { en: "AI-Augmented Creative Workflow", ar: "سير عمل إبداعي معزَّز بالذكاء الاصطناعي" } },
     ],
   },
   {
@@ -210,7 +212,7 @@ export const skills: SkillGroup[] = [
   },
 ];
 
-// AI workflow — one quiet signal, tools are not listed.
+// The single quiet AI signal — lives here (Workflow) only, nowhere else.
 export const aiStack = [
   "AI-Augmented Creative Workflow",
 ];
@@ -277,11 +279,9 @@ export const languages = [
 ];
 
 export const interests: Bi[] = [
-  { en: "Freestyle Calligraphy", ar: "الكاليجرافي الحر" },
+  { en: "Calligraphy", ar: "الكاليجرافي" },
   { en: "Photography", ar: "التصوير" },
-  { en: "Traveling", ar: "السفر" },
   { en: "Creative Writing", ar: "الكتابة الإبداعية" },
-  { en: "Fitness & Gym", ar: "اللياقة والجيم" },
 ];
 
 export type Social = { label: string; href: string; handle: string };
@@ -289,7 +289,6 @@ export type Social = { label: string; href: string; handle: string };
 export const socials: Social[] = [
   { label: "Behance", href: "https://www.behance.net/Muhmed-alaa-el-bank", handle: "Muhmed-alaa-el-bank" },
   { label: "Instagram", href: "https://www.instagram.com/muhamedalaaelbank/", handle: "muhamedalaaelbank" },
-  { label: "Unsplash", href: "https://unsplash.com/@muhmedelbank", handle: "muhmedelbank" },
   { label: "Facebook", href: "https://www.facebook.com/Ol.YaRaaaB/", handle: "Ol.YaRaaaB" },
 ];
 

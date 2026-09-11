@@ -31,7 +31,7 @@ export default function OG() {
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 16, marginTop: 24, fontSize: 30, color: "#9a9a96" }}>
             <span style={{ width: 14, height: 14, background: "#c9a227" }} />
-            Senior Graphic &amp; Brand Designer
+            Logo &amp; Visual Identity Designer
           </div>
         </div>
 

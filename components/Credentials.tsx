@@ -76,17 +76,17 @@ export default function Credentials() {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   return (
-    <section id="credentials" className="section border-b border-line bg-surface">
+    <section id="credentials" className="section border-b border-line">
       <div className="container">
         <Reveal>
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
-              <span className="eyebrow block">{t("idx.credentials")}</span>
-              <h2 className="display mt-6 text-[clamp(2.4rem,6vw,4.4rem)]">
+              <span className="eyebrow block text-faint">{t("idx.credentials")}</span>
+              <h2 className="display mt-6 text-[clamp(2rem,5vw,3.6rem)] text-ink/80">
                 {t("section.credentials")}
               </h2>
             </div>
-            <p className="lede max-w-[40ch]">{t("cred.note")}</p>
+            <p className="lede max-w-[40ch] text-[0.95rem]">{t("cred.note")}</p>
           </div>
         </Reveal>
 
@@ -124,8 +124,8 @@ export default function Credentials() {
           ))}
         </div>
 
-        {/* languages + interests */}
-        <div className="mt-16 grid grid-cols-1 gap-x-16 gap-y-12 border-t border-line pt-14 lg:grid-cols-[1fr_1fr]">
+        {/* languages + interests — languages primary, interests one quiet line */}
+        <div className="mt-16 grid grid-cols-1 gap-x-16 gap-y-12 border-t border-line pt-14 lg:grid-cols-[1.4fr_0.6fr]">
           <div>
             <span className="eyebrow mb-8 block">{t("section.languages")}</span>
             <div className="space-y-8">
@@ -154,10 +154,9 @@ export default function Credentials() {
             </div>
           </div>
 
-          <div>
-            <span className="eyebrow mb-4 block">{t("section.interests")}</span>
+          <div className="lg:pt-9">
             <Reveal>
-              <p className="mono max-w-[46ch] text-[0.72rem] leading-relaxed tracking-[0.06em] text-faint">
+              <p className="mono max-w-[46ch] text-[0.66rem] leading-relaxed tracking-[0.06em] text-faint">
                 {interests.map((it) => pick(it)).join(" · ")}
               </p>
             </Reveal>

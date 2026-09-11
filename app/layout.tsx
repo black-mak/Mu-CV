@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import Effects from "@/components/Effects";
 import MagicLayer from "@/components/MagicLayer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+import SmoothScroll from "@/components/SmoothScroll";
 import { profile, STUDIO_URL } from "@/lib/data";
 
 const SITE_URL = "https://mu-cv.vercel.app";
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Muhamed Alaa — CV | BLACK-MAK®",
     description:
-      "Senior Graphic & Brand Designer. 12+ years designing Arabic & Latin identity systems. This is the person — the studio holds the work.",
+      "Logo & Visual Identity Designer with 12+ years across Arabic & Latin identity systems. This is the person — the studio holds the work.",
     type: "profile",
     url: SITE_URL,
     siteName: "BLACK-MAK® CV",
@@ -45,7 +46,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Muhamed Alaa — CV | BLACK-MAK®",
     description:
-      "Senior Graphic & Brand Designer. 12+ years of Arabic & Latin identity systems.",
+      "Logo & Visual Identity Designer. 12+ years of Arabic & Latin identity systems.",
   },
 };
 
@@ -70,7 +71,7 @@ const jsonLd = {
   sameAs: [
     "https://www.behance.net/Muhmed-alaa-el-bank",
     "https://www.instagram.com/muhamedalaaelbank/",
-    "https://unsplash.com/@muhmedelbank",
+
     STUDIO_URL,
   ],
   knowsAbout: [
@@ -103,7 +104,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body>
+      <body id="top">
         <a
           href="#top"
           className="sr-only focus:not-sr-only focus:fixed focus:left-2 focus:top-2 focus:z-[300] focus:border focus:border-line-strong focus:bg-bg focus:px-4 focus:py-2 focus:text-ink"
@@ -111,6 +112,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <I18nProvider>
+          <SmoothScroll />
           <Effects />
           <MagicLayer />
           <Header />

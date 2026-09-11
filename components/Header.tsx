@@ -6,8 +6,8 @@ import ThemeToggle from "./ThemeToggle";
 
 const LINKS = [
   { href: "#about", k: "nav.about" as const },
-  { href: "#experience", k: "nav.experience" as const },
   { href: "#skills", k: "nav.skills" as const },
+  { href: "#experience", k: "nav.experience" as const },
   { href: "#credentials", k: "nav.credentials" as const },
 ];
 

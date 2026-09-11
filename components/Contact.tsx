@@ -28,8 +28,9 @@ export default function Contact() {
 
   const rows: Row[] = [
     { key: "email", label: t("contact.email"), value: profile.email, copy: profile.email, href: `mailto:${profile.email}` },
-    { key: "wa", label: t("contact.whatsapp"), value: profile.phone, href: profile.whatsapp, openLabel: t("contact.open") },
-    { key: "phone", label: t("contact.phone"), value: profile.phone, copy: profile.phoneRaw, href: `tel:${profile.phoneRaw}` },
+    { key: "wa", label: t("contact.phone"), value: profile.phone, copy: profile.phoneRaw, href: profile.whatsapp, openLabel: t("contact.whatsapp") },
+    { key: "instapay", label: t("contact.instapay"), value: profile.instapay, copy: profile.instapay },
+    { key: "behance", label: t("contact.behance"), value: "Muhmed-alaa-el-bank", href: "https://www.behance.net/Muhmed-alaa-el-bank", openLabel: t("contact.open") },
     { key: "loc", label: t("contact.location"), value: pick(profile.location) },
   ];
 
@@ -85,29 +86,40 @@ export default function Contact() {
             ))}
           </div>
 
-          {/* actions card */}
+          {/* actions + QR card */}
           <Reveal delay={0.12}>
             <div className="flex h-full flex-col justify-between gap-6 border border-line bg-surface p-7">
               <div>
                 <span className="eyebrow block">{profile.alias}</span>
-                <p className="mt-4 text-[1.05rem] leading-relaxed text-muted">
-                  {lang === "ar"
-                    ? "جاهز لبدء مشروع؟ حمّل نسخة السيرة، أو انتقل إلى الاستوديو لرؤية الأعمال كاملة."
-                    : "Ready to start a project? Grab a copy of the résumé, or head to the studio to see the full body of work."}
-                </p>
+                <p className="mt-4 text-[1.05rem] leading-relaxed text-muted">{t("contact.actionsNote")}</p>
               </div>
               <div className="flex flex-col gap-3">
-                <button
-                  onClick={() => window.print()}
-                  className="btn btn-light w-full"
-                >
-                  <span>{t("contact.print")}</span>
+                <a href={profile.cvPdf} download className="btn btn-light w-full">
+                  <span>{t("contact.downloadPdf")}</span>
                   <span aria-hidden="true">⇩</span>
-                </button>
+                </a>
                 <a href={STUDIO_URL} target="_blank" rel="noopener noreferrer" className="btn btn-ghost w-full">
                   <span>{lang === "ar" ? "زيارة الاستوديو" : "Visit the studio"}</span>
                   <span aria-hidden="true">↗</span>
                 </a>
+              </div>
+
+              {/* QR — real, scannable, generated static asset */}
+              <div className="flex items-center gap-4 border-t border-line pt-5">
+                <a
+                  href="https://mu-cv.vercel.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="mu-cv.vercel.app"
+                  className="shrink-0 border border-line-strong bg-bg p-2 transition-colors hover:border-ink"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="/qr-cv.svg" alt="QR code — mu-cv.vercel.app" width="104" height="104" className="block" />
+                </a>
+                <p className="mono text-[0.58rem] uppercase leading-relaxed tracking-[0.12em] text-faint">
+                  {t("contact.qrNote")}
+                  <span className="mt-1 block text-muted">mu-cv.vercel.app</span>
+                </p>
               </div>
             </div>
           </Reveal>

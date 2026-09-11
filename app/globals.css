@@ -156,28 +156,6 @@ ul {
   z-index: 1000;
   will-change: transform;
 }
-.cursor-glow {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 26rem;
-  height: 26rem;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.08), transparent 68%);
-  pointer-events: none;
-  z-index: 0;
-  transform: translate(-50%, -50%);
-  transition: opacity 0.3s var(--ease);
-  will-change: transform;
-}
-[data-theme="light"] .cursor-glow {
-  background: radial-gradient(circle, rgba(0, 0, 0, 0.05), transparent 68%);
-}
-@media (hover: none), (max-width: 767px) {
-  .cursor-glow {
-    display: none;
-  }
-}
 
 /* buttons */
 .btn {
@@ -306,7 +284,6 @@ html[lang="ar"] .stroke-text {
   }
   .no-print,
   .scroll-progress,
-  .cursor-glow,
   header,
   .seal-cta,
   .wa-float,

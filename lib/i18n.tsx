@@ -29,8 +29,8 @@ const UI = {
   "section.connect": { en: "Connect", ar: "تواصل" },
 
   "idx.about": { en: "01 / ABOUT", ar: "٠١ / نبذة" },
-  "idx.experience": { en: "02 / EXPERIENCE", ar: "٠٢ / الخبرة" },
-  "idx.skills": { en: "03 / SKILLS", ar: "٠٣ / المهارات" },
+  "idx.skills": { en: "02 / SKILLS", ar: "٠٢ / المهارات" },
+  "idx.experience": { en: "03 / EXPERIENCE", ar: "٠٣ / الخبرة" },
   "idx.credentials": { en: "04 / CREDENTIALS", ar: "٠٤ / الشهادات" },
   "idx.contact": { en: "05 / CONTACT", ar: "٠٥ / التواصل" },
 
@@ -46,12 +46,22 @@ const UI = {
   "contact.copy": { en: "Copy", ar: "نسخ" },
   "contact.copied": { en: "Copied", ar: "تم النسخ" },
   "contact.email": { en: "Email", ar: "البريد" },
-  "contact.phone": { en: "Phone", ar: "الهاتف" },
+  "contact.phone": { en: "Phone · WhatsApp", ar: "الهاتف · واتساب" },
   "contact.whatsapp": { en: "WhatsApp", ar: "واتساب" },
   "contact.location": { en: "Location", ar: "الموقع" },
   "contact.open": { en: "Open ↗", ar: "فتح ↗" },
+  "contact.instapay": { en: "Instapay · Egypt", ar: "إنستاباي · مصر" },
+  "contact.behance": { en: "Behance · Portfolio", ar: "بيهانس · الأعمال" },
+
+  "contact.studio": { en: "The Studio", ar: "الاستوديو" },
+  "contact.vcard": { en: "Save contact (.vcf)", ar: "حفظ جهة الاتصال" },
   "contact.downloadPdf": { en: "Download PDF résumé", ar: "تنزيل السيرة PDF" },
   "contact.print": { en: "Print / Save as PDF", ar: "طباعة / حفظ PDF" },
+  "contact.qrNote": { en: "Scan to open this CV on any device", ar: "امسح لفتح السيرة على أي جهاز" },
+  "contact.actionsNote": {
+    en: "Ready to start a project? Grab a copy of the résumé, save the contact, or head to the studio to see the full body of work.",
+    ar: "جاهز لبدء مشروع؟ حمّل نسخة السيرة، احفظ جهة الاتصال، أو انتقل إلى الاستوديو لرؤية الأعمال كاملة.",
+  },
 
   "footer.tagline": {
     en: "A premium logo & visual identity practice by Muhamed Alaa.",
