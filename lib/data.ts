@@ -22,7 +22,7 @@ export const profile = {
   },
   location: { en: "Egypt · Working Worldwide", ar: "مصر · أعمل حول العالم" },
   experienceYears: { en: "12+ years of experience", ar: "أكثر من ١٢ عامًا من الخبرة" },
-  email: "muhemedalaa2699@gmail.com",
+  email: "makeenmuhamed31@gmail.com",
   phone: "+20 100 246 2821",
   phoneRaw: "+201002462821",
   whatsapp: "https://wa.me/201002462821",
@@ -166,7 +166,10 @@ export const education: Edu[] = [
     to: "2017",
     degree: { en: "Diploma in Surveying Engineering", ar: "دبلوم هندسة المساحة" },
     org: { en: "Higher Institute of Surveying", ar: "المعهد العالي للمساحة" },
-    note: { en: "", ar: "" },
+    note: {
+      en: "Technical training in precision measurement and spatial systems.",
+      ar: "تدريب تقني في القياس الدقيق والأنظمة المكانية.",
+    },
   },
   {
     from: "2011",

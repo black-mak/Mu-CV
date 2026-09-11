@@ -9,6 +9,7 @@ import MagicLayer from "@/components/MagicLayer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import SmoothScroll from "@/components/SmoothScroll";
 import { profile, STUDIO_URL } from "@/lib/data";
+import { Analytics } from "@vercel/analytics/react";
 
 const SITE_URL = "https://mu-cv.vercel.app";
 
@@ -30,7 +31,6 @@ export const metadata: Metadata = {
   authors: [{ name: "Muhamed Alaa", url: SITE_URL }],
   alternates: {
     canonical: SITE_URL,
-    languages: { en: SITE_URL, ar: SITE_URL },
   },
   robots: { index: true, follow: true },
   openGraph: {
@@ -120,6 +120,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
           <WhatsAppFloat />
         </I18nProvider>
+        <Analytics />
       </body>
     </html>
   );

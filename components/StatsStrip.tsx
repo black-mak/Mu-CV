@@ -9,7 +9,7 @@ export default function StatsStrip() {
 
   return (
     <section aria-label="Facts" className="border-b border-line bg-surface">
-      <div className="container grid grid-cols-2 gap-y-8 py-12 md:grid-cols-4">
+      <div className="container grid grid-cols-3 gap-y-8 py-12">
         {stats.map((s, i) => (
           <Reveal key={i} delay={i * 0.08}>
             <div className="px-2 text-center md:text-start">

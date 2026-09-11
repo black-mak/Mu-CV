@@ -6,6 +6,8 @@ import { profile } from "@/lib/data";
 
 // Typewriter that cycles the role + specialist titles.
 // Respects reduced-motion (falls back to a static joined string).
+// Renders the first word server-side / pre-JS so screen readers and
+// no-JS visitors always get real text (never an empty blinking cursor).
 export default function RoleRotator() {
   const { lang, pick } = useI18n();
 
@@ -15,19 +17,24 @@ export default function RoleRotator() {
   }, [lang, pick]);
 
   const [i, setI] = useState(0);
-  const [text, setText] = useState("");
+  // SSR-safe seed: the first word is visible before any JS runs.
+  const [text, setText] = useState(() => (typeof window === "undefined" ? words[0] : ""));
   const [deleting, setDeleting] = useState(false);
   const reduce = useRef(false);
 
   useEffect(() => {
-    reduce.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  }, []);
-
-  useEffect(() => {
-    if (reduce.current) {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    reduce.current = mq;
+    if (mq) {
       setText(words[0]);
       return;
     }
+    // start the typewriter cycle from a clean state on the client
+    setText("");
+  }, [words]);
+
+  useEffect(() => {
+    if (reduce.current) return;
     const current = words[i % words.length];
     const done = text === current;
     const empty = text === "";
@@ -56,7 +63,7 @@ export default function RoleRotator() {
   return (
     <p className="mono flex min-h-[1.4em] items-center gap-2 text-[0.82rem] uppercase tracking-[0.14em] text-ink">
       <span className="inline-block h-[6px] w-[6px] bg-seal" aria-hidden="true" />
-      <span>{text}</span>
+      <span>{text || words[0]}</span>
       {!reduce.current && (
         <span className="ml-[1px] inline-block h-[1em] w-[2px] animate-pulse bg-ink align-middle" aria-hidden="true" />
       )}
