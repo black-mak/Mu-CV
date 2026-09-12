@@ -4,12 +4,13 @@ import { useRef, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
 import { seal, STUDIO_URL } from "@/lib/data";
+import { MarkPaths } from "./BrandMark";
 import Reveal from "./Reveal";
 
 // The finale. One bold move, spent in a single place (restraint principle):
 // a magnetic stamp that pulls toward the cursor; on hover a rotating seal ring
 // with the practice name fades in, then the click "stamps" the visitor through
-// to the studio. This is the hook that turns "my data" into "my work".
+// to the studio. The real solid mark sits at the disc's heart.
 export default function SealCTA() {
   const { pick, lang } = useI18n();
   const ref = useRef<HTMLAnchorElement>(null);
@@ -43,10 +44,10 @@ export default function SealCTA() {
       <div className="absolute inset-0 hero-grid opacity-30 pointer-events-none" aria-hidden="true" />
 
       <div className="container relative z-10 flex flex-col items-center">
-        <Reveal>
+        <Reveal tier="ambient">
           <span className="eyebrow">{pick(seal.eyebrow)}</span>
         </Reveal>
-        <Reveal delay={0.08}>
+        <Reveal tier="ambient" delay={0.08}>
           <h2 className="display mt-6 max-w-[18ch] text-[clamp(2rem,5.5vw,4rem)]">
             {pick(seal.line)}
           </h2>
@@ -73,7 +74,7 @@ export default function SealCTA() {
               </g>
             </motion.svg>
 
-            {/* magnetic disc */}
+            {/* magnetic stamp disc — the real mark at its heart */}
             <motion.a
               ref={ref}
               href={STUDIO_URL}
@@ -89,12 +90,20 @@ export default function SealCTA() {
                 className="absolute inset-4 rounded-full border border-dashed border-faint transition-colors duration-500 group-hover:border-seal/50"
                 aria-hidden="true"
               />
-              <span className="relative z-10 flex flex-col items-center px-6">
-                <span className="display text-[clamp(1.1rem,2.6vw,1.6rem)] leading-tight transition-transform duration-500 group-hover:scale-105">
+              <span className="relative z-10 flex flex-col items-center gap-4 px-6">
+                {/* the solid identity mark — stamping into the studio */}
+                <svg
+                  viewBox="154.4 0 115.96 123.06"
+                  aria-hidden="true"
+                  className="h-16 w-16 text-ink transition-transform duration-700 group-hover:scale-110 md:h-20 md:w-20"
+                >
+                  <MarkPaths />
+                </svg>
+                <span className="mono flex items-center gap-2 text-[0.6rem] uppercase tracking-[0.16em] text-muted">
+                  <span className="transition-transform duration-500 group-hover:-translate-x-1 group-hover:translate-y-1" aria-hidden="true">
+                    ←
+                  </span>
                   {pick(seal.center)}
-                </span>
-                <span className="mono mt-3 flex items-center gap-2 text-[0.6rem] uppercase tracking-[0.16em] text-muted">
-                  {seal.domain}
                   <span className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" aria-hidden="true">
                     ↗
                   </span>
@@ -117,3 +126,4 @@ export default function SealCTA() {
     </section>
   );
 }
+

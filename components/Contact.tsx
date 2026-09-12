@@ -67,7 +67,16 @@ export default function Contact() {
                         onClick={() => copy(r.key, r.copy!)}
                         className="border border-line-strong px-3 py-2 mono text-[0.62rem] uppercase tracking-widest text-muted transition-colors hover:border-ink hover:text-ink"
                       >
-                        {copied === r.key ? t("contact.copied") : t("contact.copy")}
+                        {copied === r.key ? (
+                          <span className="inline-flex items-center gap-1.5">
+                            <svg viewBox="0 0 24 24" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                              <path d="M20 6 9 17l-5-5" />
+                            </svg>
+                            {t("contact.copied")}
+                          </span>
+                        ) : (
+                          t("contact.copy")
+                        )}
                       </button>
                     )}
                     {r.href && (
