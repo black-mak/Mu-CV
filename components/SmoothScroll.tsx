@@ -2,8 +2,14 @@
 
 import { useEffect } from "react";
 
-// Lenis smooth scroll — editorial browsing feel.
+// ============================================================================
+// Lenis smooth scroll — editorial browsing feel + unified anchor navigation.
+// CRITICAL: with Lenis active, native CSS scroll-behavior and anchor jumps
+// break (they teleport). This module intercepts ALL same-page anchor clicks
+// and routes them through lenis.scrollTo() with header offset — smooth,
+// consistent, and the IntersectionObserver header state stays in sync.
 // Respects prefers-reduced-motion and touch devices (native scroll there).
+// ============================================================================
 export default function SmoothScroll() {
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -26,11 +32,31 @@ export default function SmoothScroll() {
         raf = requestAnimationFrame(loop);
       };
       raf = requestAnimationFrame(loop);
+
+      // Route anchor navigation through Lenis — the moment that made every
+      // #nav link feel abrupt now becomes one continuous editorial glide.
+      const HEADER_OFFSET = 90;
+      const onClick = (e: MouseEvent) => {
+        const a = (e.target as HTMLElement).closest?.("a[href^='#']") as HTMLAnchorElement | null;
+        if (!a) return;
+        const href = a.getAttribute("href");
+        if (!href || href === "#") return;
+        const el = document.querySelector(href);
+        if (!el) return;
+        e.preventDefault();
+        lenis?.scrollTo(el as HTMLElement, { offset: -HEADER_OFFSET, duration: 1.2 });
+      };
+      document.addEventListener("click", onClick);
+
+      // expose for cleanup
+      (window as unknown as { __lenisCleanup?: () => void }).__lenisCleanup = () =>
+        document.removeEventListener("click", onClick);
     });
 
     return () => {
       cancelled = true;
       cancelAnimationFrame(raf);
+      (window as unknown as { __lenisCleanup?: () => void }).__lenisCleanup?.();
       lenis?.destroy();
     };
   }, []);
