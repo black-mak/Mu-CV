@@ -15,7 +15,7 @@ const SITE_URL = "https://mu-cv.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Muhamed Alaa — CV | BLACK-MAK® Logo & Visual Identity Designer",
+  title: "Muhamed Alaa — Logo & Visual Identity Designer | BLACK-MAK®",
   description:
     "The online CV of Muhamed Alaa (BLACK-MAK®): Logo & Visual Identity Designer with 12+ years across Arabic & Latin typography, logo design and identity systems. Bilingual EN/AR.",
   keywords: [

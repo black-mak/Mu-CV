@@ -89,24 +89,19 @@ export default function Experience() {
           </div>
         </div>
 
-        {/* education */}
+        {/* education — supporting information, kept compact */}
         <Reveal>
-          <h3 className="eyebrow mt-20 mb-8 block border-t border-line pt-10">
+          <h3 className="eyebrow mt-20 mb-6 block border-t border-line pt-10">
             {t("section.education")}
           </h3>
         </Reveal>
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-x-12 gap-y-4 md:grid-cols-2">
           {education.map((edu, i) => (
-            <Reveal key={i} delay={i * 0.1}>
-              <div className="print-avoid-break h-full border border-line bg-bg p-6">
-                <div className="mono text-xs text-muted">
-                  {edu.from} — {edu.to}
-                </div>
-                <h4 className="mt-3 text-lg font-bold">{pick(edu.degree)}</h4>
-                <div className="mono mt-1 text-xs uppercase tracking-wider text-ink/60">
-                  {pick(edu.org)}
-                </div>
-                <p className="mt-3 text-sm leading-relaxed text-muted">{pick(edu.note)}</p>
+            <Reveal key={i} delay={i * 0.06} tier="feedback">
+              <div className="print-avoid-break flex flex-wrap items-baseline gap-x-3 gap-y-1 border-b border-line pb-3">
+                <span className="mono text-xs text-faint">{edu.from} — {edu.to}</span>
+                <span className="text-[0.92rem] font-bold">{pick(edu.degree)}</span>
+                <span className="mono text-[0.68rem] uppercase tracking-wider text-muted">{pick(edu.org)}</span>
               </div>
             </Reveal>
           ))}

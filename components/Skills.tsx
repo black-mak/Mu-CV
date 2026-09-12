@@ -4,7 +4,6 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
 import { skills, type SkillGroup } from "@/lib/data";
 import Reveal from "./Reveal";
-
 function TiltCard({ group, index }: { group: SkillGroup; index: number }) {
   const { pick } = useI18n();
   const x = useMotionValue(0);
@@ -53,7 +52,12 @@ function TiltCard({ group, index }: { group: SkillGroup; index: number }) {
 }
 
 export default function Skills() {
-  const { t } = useI18n();
+  const { t, pick } = useI18n();
+
+  // Design-craft groups get full weight; Leadership & Operations is a
+  // supporting footnote line — secondary experience, not a buying reason.
+  const core = skills.slice(0, 2);
+  const leadership = skills.find((g) => g.cat.en.includes("Leadership"));
 
   return (
     <section id="skills" className="section border-b border-line">
@@ -64,11 +68,19 @@ export default function Skills() {
           <p className="lede mt-5">{t("skills.note")}</p>
         </Reveal>
 
-        <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3" style={{ perspective: 1000 }}>
-          {skills.map((g, i) => (
+        <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2" style={{ perspective: 1000 }}>
+          {core.map((g, i) => (
             <TiltCard key={i} group={g} index={i} />
           ))}
         </div>
+
+        {leadership && (
+          <Reveal delay={0.1} tier="feedback">
+            <p className="mono mt-6 border-t border-line pt-4 text-[0.62rem] uppercase tracking-[0.12em] text-faint">
+              {pick(leadership.cat)} — {leadership.items.map((it) => pick(it.name)).join(" · ")}
+            </p>
+          </Reveal>
+        )}
       </div>
     </section>
   );
