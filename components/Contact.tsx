@@ -116,18 +116,18 @@ export default function Contact() {
               {/* QR â€” real, scannable, generated static asset */}
               <div className="flex items-center gap-4 border-t border-line pt-5">
                 <a
-                  href="https://mohamed-cv.vercel.app"
+                  href="https://muhamed-cv.vercel.app"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="mohamed-cv.vercel.app"
+                  aria-label="muhamed-cv.vercel.app"
                   className="shrink-0 border border-line-strong bg-bg p-2 transition-colors hover:border-ink"
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/qr-cv.svg" alt="QR code â€” mohamed-cv.vercel.app" width="104" height="104" className="block" />
+                  <img src="/qr-cv.svg" alt="QR code â€” muhamed-cv.vercel.app" width="104" height="104" className="block" />
                 </a>
                 <p className="mono text-[0.58rem] uppercase leading-relaxed tracking-[0.12em] text-faint">
                   {t("contact.qrNote")}
-                  <span className="mt-1 block text-muted">mohamed-cv.vercel.app</span>
+                  <span className="mt-1 block text-muted">muhamed-cv.vercel.app</span>
                 </p>
               </div>
             </div>

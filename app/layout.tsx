@@ -11,7 +11,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import { profile, STUDIO_URL } from "@/lib/data";
 import { Analytics } from "@vercel/analytics/react";
 
-const SITE_URL = "https://mohamed-cv.vercel.app";
+const SITE_URL = "https://muhamed-cv.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
