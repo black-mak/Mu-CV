@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { useI18n } from "@/lib/i18n";
@@ -105,29 +105,29 @@ export default function Contact() {
               <div className="flex flex-col gap-3">
                 <a href={profile.cvPdf} download className="btn btn-light w-full">
                   <span>{t("contact.downloadPdf")}</span>
-                  <span aria-hidden="true">⇩</span>
+                  <span aria-hidden="true">â‡©</span>
                 </a>
                 <a href={STUDIO_URL} target="_blank" rel="noopener noreferrer" className="btn btn-ghost w-full">
-                  <span>{lang === "ar" ? "زيارة الاستوديو" : "Visit the studio"}</span>
-                  <span aria-hidden="true">↗</span>
+                  <span>{lang === "ar" ? "Ø²ÙŠØ§Ø±Ø© Ø§Ù„Ø§Ø³ØªÙˆØ¯ÙŠÙˆ" : "Visit the studio"}</span>
+                  <span aria-hidden="true">â†—</span>
                 </a>
               </div>
 
-              {/* QR — real, scannable, generated static asset */}
+              {/* QR â€” real, scannable, generated static asset */}
               <div className="flex items-center gap-4 border-t border-line pt-5">
                 <a
-                  href="https://mu-cv.vercel.app"
+                  href="https://mohamed-cv.vercel.app"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="mu-cv.vercel.app"
+                  aria-label="mohamed-cv.vercel.app"
                   className="shrink-0 border border-line-strong bg-bg p-2 transition-colors hover:border-ink"
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/qr-cv.svg" alt="QR code — mu-cv.vercel.app" width="104" height="104" className="block" />
+                  <img src="/qr-cv.svg" alt="QR code â€” mohamed-cv.vercel.app" width="104" height="104" className="block" />
                 </a>
                 <p className="mono text-[0.58rem] uppercase leading-relaxed tracking-[0.12em] text-faint">
                   {t("contact.qrNote")}
-                  <span className="mt-1 block text-muted">mu-cv.vercel.app</span>
+                  <span className="mt-1 block text-muted">mohamed-cv.vercel.app</span>
                 </p>
               </div>
             </div>

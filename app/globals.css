@@ -11,7 +11,8 @@
   --surface-2: #17181b;
   --ink: #f5f5f1;
   --muted: #9a9a96;
-  --faint: #5d5d59;
+  /* 4.6:1 on #070708 — clears WCAG AA for the small-caption voice */
+  --faint: #8b8b87;
   --line: rgba(255, 255, 255, 0.12);
   --line-strong: rgba(255, 255, 255, 0.26);
   --seal: #c9a227; /* ink-stamp gold — the one accent, spent in a single place */
@@ -27,7 +28,7 @@
   --surface-2: #d8d6d0;
   --ink: #0a0a0a;
   --muted: #55554f;
-  --faint: #8a877f;
+  --faint: #6d6a63;
   --line: rgba(0, 0, 0, 0.13);
   --line-strong: rgba(0, 0, 0, 0.28);
   --seal: #a9821a;
@@ -51,7 +52,7 @@ html.has-smooth {
 body {
   background: var(--bg);
   color: var(--ink);
-  font-family: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--font-body, var(--font-signate)), "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -59,16 +60,17 @@ body {
   transition: background 0.5s var(--ease), color 0.5s var(--ease);
 }
 
-/* film grain — the signature print texture */
+/* film grain — the signature print texture. opacity-only (the
+   mix-blend-mode forced a full-screen stacking context over every layer,
+   every frame — visually identical without it). */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.035;
+  opacity: 0.04;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
-  mix-blend-mode: soft-light;
 }
 
 a {
@@ -115,10 +117,13 @@ ul {
   padding-block: var(--section);
 }
 .display {
+  font-family: var(--font-signate, var(--font-body)), "Helvetica Neue", Arial, sans-serif;
   font-weight: 800;
   line-height: 0.92;
   letter-spacing: -0.045em;
   text-transform: uppercase;
+  /* orphan control at display sizes */
+  text-wrap: balance;
 }
 .eyebrow {
   font-family: var(--font-mono), ui-monospace, monospace;
@@ -186,14 +191,10 @@ ul {
   color: var(--bg);
 }
 .btn-light:hover {
-  background: #fff;
-  border-color: #fff;
-  color: #000;
-}
-[data-theme="light"] .btn-light:hover {
-  background: #000;
-  border-color: #000;
-  color: #fff;
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg);
+  filter: brightness(1.08);
 }
 .btn-ghost {
   background: transparent;
@@ -223,11 +224,21 @@ ul {
 }
 
 /* ============================================================
-   Arabic adjustments (RTL) — Asal face, no upper/letter-spacing
+   Arabic mode (RTL) — ONE face: Asal, everywhere.
+   The Latin families (TCCC Headline/Text, IBM Plex Mono) carry no
+   Arabic glyphs — without these swaps, Arabic text silently falls
+   back to a system face (the "Arial look"). Every selector that sets
+   a Latin family is switched to Asal when lang="ar". The giant name
+   wordmark stays TCCC — Latin brand text, identical in both languages.
    ============================================================ */
-html[lang="ar"] body {
-  font-family: var(--font-ar), "Segoe UI", Arial, sans-serif;
-  letter-spacing: 0;
+html[lang="ar"] body,
+html[lang="ar"] .display,
+html[lang="ar"] .eyebrow,
+html[lang="ar"] .btn,
+html[lang="ar"] .text-link,
+html[lang="ar"] .mono,
+html[lang="ar"] .font-mono {
+  font-family: var(--font-ar), "IBM Plex Sans Arabic", Arial, sans-serif;
 }
 html[lang="ar"] .display {
   letter-spacing: -0.01em;
@@ -236,6 +247,13 @@ html[lang="ar"] .display {
 html[lang="ar"] .eyebrow {
   letter-spacing: 0;
   text-transform: none;
+}
+/* letter-spacing breaks Arabic letter joining — zero it on the label voices */
+html[lang="ar"] .btn,
+html[lang="ar"] .text-link,
+html[lang="ar"] .mono,
+html[lang="ar"] .font-mono {
+  letter-spacing: 0;
 }
 html[lang="ar"] .stroke-text {
   -webkit-text-stroke-width: 1.5px;
@@ -314,12 +332,17 @@ html[lang="ar"] .stroke-text {
    Magic layer — signature micro-interactions (CV)
    ============================================================ */
 
-/* display <em>: metallic sheen */
+/* display <em>: metallic sheen — color fallback first so the text stays
+   legible if clip-text fails (print, some readers). */
 .display em {
+  color: var(--muted);
   background: linear-gradient(100deg, var(--ink) 20%, var(--muted) 50%, var(--ink) 80%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+@supports not (-webkit-background-clip: text) {
+  .display em { color: var(--muted); }
 }
 
 /* hero kicker: one-time shimmer sweep */
@@ -410,6 +433,32 @@ html[dir="rtl"] .display { transform-origin: right bottom; }
   box-shadow: 0 16px 40px -20px rgba(0, 0, 0, 0.5);
 }
 
+/* FOOTER: the giant name — outlined glyphs fill solid on hover (studio DNA).
+   Brand wordmark is Latin brand text: ALWAYS set in TCCC, same direction,
+   same letter order in both languages (dir="ltr" is set on the element
+   itself, so the RTL page never reverses the glyphs). */
+.giant-word {
+  font-family: var(--font-signate, var(--font-body, "Helvetica Neue", Arial, sans-serif));
+  font-weight: 800;
+  font-size: clamp(3rem, 12.5vw, 12.5rem);
+  line-height: 0.78;
+  letter-spacing: -0.02em;
+  margin-bottom: -0.16em;
+}
+.giant-letter {
+  display: inline-block;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--line-strong);
+  transition: color 0.45s var(--ease), -webkit-text-stroke-color 0.45s var(--ease),
+    transform 0.45s var(--ease);
+  will-change: transform;
+}
+.giant-letter:hover {
+  color: var(--ink);
+  -webkit-text-stroke-color: var(--ink);
+  transform: translateY(-0.04em);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .word-rise > span,
   .kicker-shimmer,
@@ -418,7 +467,8 @@ html[dir="rtl"] .display { transform-origin: right bottom; }
   .seal-halo,
   .tspine,
   .portrait-settle,
-  .cert-lift {
+  .cert-lift,
+  .giant-letter {
     animation: none !important;
     transition: none !important;
   }
@@ -427,5 +477,12 @@ html[dir="rtl"] .display { transform-origin: right bottom; }
     -webkit-text-fill-color: var(--ink);
     background: none;
     transform: none;
+  }
+  .giant-letter {
+    color: var(--faint);
+    -webkit-text-stroke-color: var(--faint);
+  }
+  .giant-word {
+    margin-bottom: 0;
   }
 }

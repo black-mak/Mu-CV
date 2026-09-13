@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
 import { seal, STUDIO_URL } from "@/lib/data";
-import { MarkPaths } from "./BrandMark";
+import { MarkPaths, MARK_VIEWBOX } from "./BrandMark";
 import Reveal from "./Reveal";
 
 // The finale. One bold move, spent in a single place (restraint principle):
@@ -93,7 +93,7 @@ export default function SealCTA() {
               <span className="relative z-10 flex flex-col items-center gap-4 px-6">
                 {/* the solid identity mark — stamping into the studio */}
                 <svg
-                  viewBox="154.4 0 115.96 123.06"
+                  viewBox={MARK_VIEWBOX}
                   aria-hidden="true"
                   className="h-16 w-16 text-ink transition-transform duration-700 group-hover:scale-110 md:h-20 md:w-20"
                 >

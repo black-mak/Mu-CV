@@ -1,9 +1,9 @@
-import type { MetadataRoute } from "next";
+﻿import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: "https://mu-cv.vercel.app",
+      url: "https://mohamed-cv.vercel.app",
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 1,

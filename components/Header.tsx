@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import { useI18n } from "@/lib/i18n";
@@ -75,7 +75,7 @@ export default function Header() {
             </a>
           ))}
           <a
-            href="https://black-mak-v4.vercel.app/"
+            href="https://black-mak.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
             className="mono text-[0.68rem] uppercase tracking-[0.16em] text-muted transition-colors hover:text-ink"
@@ -84,7 +84,7 @@ export default function Header() {
           </a>
           <a href="#contact" className="btn btn-light">
             <span>{t("nav.contact")}</span>
-            <span aria-hidden="true">↗</span>
+            <span aria-hidden="true">â†—</span>
           </a>
         </nav>
 
@@ -124,7 +124,7 @@ export default function Header() {
             </a>
           ))}
           <a
-            href="https://black-mak-v4.vercel.app/"
+            href="https://black-mak.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setOpen(false)}

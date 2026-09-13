@@ -20,7 +20,7 @@ const config: Config = {
         seal: "var(--seal)",
       },
       fontFamily: {
-        sans: ["var(--font-archivo)", "Helvetica Neue", "Arial", "sans-serif"],
+        sans: ["var(--font-signate)", "Helvetica Neue", "Arial", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
         ar: ["var(--font-ar)", "Arial", "sans-serif"],
       },

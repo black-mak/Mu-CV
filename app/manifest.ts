@@ -1,0 +1,22 @@
+import type { MetadataRoute } from "next";
+
+export default function manifest(): MetadataRoute.Manifest {
+  return {
+    name: "Muhamed Alaa — CV | BLACK-MAK®",
+    short_name: "MA CV",
+    description:
+      "The online CV of Muhamed Alaa (BLACK-MAK®): Logo & Visual Identity Designer with 12+ years across Arabic & Latin identity systems.",
+    start_url: "/",
+    display: "standalone",
+    background_color: "#070708",
+    theme_color: "#070708",
+    icons: [
+      {
+        src: "/icon.svg",
+        sizes: "any",
+        type: "image/svg+xml",
+        purpose: "any",
+      },
+    ],
+  };
+}
