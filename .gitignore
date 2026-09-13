@@ -12,3 +12,5 @@ next-env.d.ts
 
 .vercel
 .env*
+
+vercel-old-mu-cv/
