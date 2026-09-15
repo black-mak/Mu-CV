@@ -134,6 +134,7 @@ export default function MagicLayer() {
     lines.forEach((l) => lineObs.observe(l));
 
     return () => {
+      cancelAnimationFrame(rafMag);
       window.removeEventListener("mousemove", onMagMove);
       window.removeEventListener("resize", onResize);
       lineObs.disconnect();

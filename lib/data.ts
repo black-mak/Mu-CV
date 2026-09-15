@@ -307,6 +307,6 @@ export const seal = {
     ar: "أعمال مختارة، والعملية، والخدمات، ومعلومات المشاريع.",
   },
   center: { en: "EXPLORE BLACK-MAK STUDIO", ar: "استكشف استوديو BLACK-MAK" },
-  ring: "MUHAMED ALAA · BLACK-MAK® · EST. 2014 · ",
+  // ring text now lives in SealCTA (bilingual, closed-circle solved at runtime)
   domain: "black-mak.vercel.app",
 };
