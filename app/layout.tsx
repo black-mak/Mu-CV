@@ -1,4 +1,4 @@
-﻿import type { Metadata, Viewport } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { unityHeadline, unityText, plexMono, asalArabic } from "@/lib/fonts";
 import { I18nProvider } from "@/lib/i18n";
@@ -15,9 +15,9 @@ const SITE_URL = "https://muhamed-cv.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Muhamed Alaa â€” Logo & Visual Identity Designer | BLACK-MAKÂ®",
+  title: "Muhamed Alaa — Logo & Visual Identity Designer | BLACK-MAK®",
   description:
-    "The online CV of Muhamed Alaa (BLACK-MAKÂ®): Logo & Visual Identity Designer with 12+ years across Arabic & Latin typography, logo design and identity systems. Bilingual EN/AR.",
+    "The online CV of Muhamed Alaa (BLACK-MAK®): Logo & Visual Identity Designer with 12+ years across Arabic & Latin typography, logo design and identity systems. Bilingual EN/AR.",
   keywords: [
     "Muhamed Alaa",
     "BLACK-MAK",
@@ -34,17 +34,17 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
   openGraph: {
-    title: "Muhamed Alaa â€” CV | BLACK-MAKÂ®",
+    title: "Muhamed Alaa — CV | BLACK-MAK®",
     description:
-      "Logo & Visual Identity Designer with 12+ years across Arabic & Latin identity systems. This is the person â€” the studio holds the work.",
+      "Logo & Visual Identity Designer with 12+ years across Arabic & Latin identity systems. This is the person — the studio holds the work.",
     type: "profile",
     url: SITE_URL,
-    siteName: "BLACK-MAKÂ® CV",
+    siteName: "BLACK-MAK® CV",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Muhamed Alaa â€” CV | BLACK-MAKÂ®",
+    title: "Muhamed Alaa — CV | BLACK-MAK®",
     description:
       "Logo & Visual Identity Designer. 12+ years of Arabic & Latin identity systems.",
   },
@@ -67,7 +67,7 @@ const jsonLd = {
   email: `mailto:${profile.email}`,
   telephone: profile.phoneRaw,
   address: { "@type": "PostalAddress", addressLocality: "New Valley", addressCountry: "EG" },
-  worksFor: { "@type": "Organization", name: "BLACK-MAKÂ®" },
+  worksFor: { "@type": "Organization", name: "BLACK-MAK®" },
   sameAs: [
     "https://www.behance.net/Muhmed-alaa-el-bank",
     "https://www.instagram.com/muhamedalaaelbank/",

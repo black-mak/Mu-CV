@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { useI18n } from "@/lib/i18n";
@@ -105,15 +105,15 @@ export default function Contact() {
               <div className="flex flex-col gap-3">
                 <a href={profile.cvPdf} download className="btn btn-light w-full">
                   <span>{t("contact.downloadPdf")}</span>
-                  <span aria-hidden="true">â‡©</span>
+                  <span aria-hidden="true">⇩</span>
                 </a>
                 <a href={STUDIO_URL} target="_blank" rel="noopener noreferrer" className="btn btn-ghost w-full">
-                  <span>{lang === "ar" ? "Ø²ÙŠØ§Ø±Ø© Ø§Ù„Ø§Ø³ØªÙˆØ¯ÙŠÙˆ" : "Visit the studio"}</span>
-                  <span aria-hidden="true">â†—</span>
+                  <span>{lang === "ar" ? "زيارة الاستوديو" : "Visit the studio"}</span>
+                  <span aria-hidden="true">↗</span>
                 </a>
               </div>
 
-              {/* QR â€” real, scannable, generated static asset */}
+              {/* QR — real, scannable, generated static asset */}
               <div className="flex items-center gap-4 border-t border-line pt-5">
                 <a
                   href="https://muhamed-cv.vercel.app"
@@ -123,7 +123,7 @@ export default function Contact() {
                   className="shrink-0 border border-line-strong bg-bg p-2 transition-colors hover:border-ink"
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/qr-cv.svg" alt="QR code â€” muhamed-cv.vercel.app" width="104" height="104" className="block" />
+                  <img src="/qr-cv.svg" alt="QR code — muhamed-cv.vercel.app" width="104" height="104" className="block" />
                 </a>
                 <p className="mono text-[0.58rem] uppercase leading-relaxed tracking-[0.12em] text-faint">
                   {t("contact.qrNote")}

@@ -1,10 +1,10 @@
-﻿import localFont from "next/font/local";
+import localFont from "next/font/local";
 import { IBM_Plex_Mono } from "next/font/google";
 
 // The studio (black-mak) and the CV both set their Latin type in TCCC
-// Unity â€” the brand's own face, converted to woff2 from the source TTFs.
+// Unity — the brand's own face, converted to woff2 from the source TTFs.
 // Only the weights the UI actually uses are loaded (Light/Medium cuts were
-// never referenced â€” dropped). Same families/variables on both sites â€”
+// never referenced — dropped). Same families/variables on both sites —
 // pixel-identical letterforms, zero layout shift, one visual DNA.
 export const unityHeadline = localFont({
   src: [
@@ -25,7 +25,7 @@ export const unityText = localFont({
   display: "swap",
 });
 
-// Latin subset only â€” cyrillic/vietnamese were dead weight.
+// Latin subset only — cyrillic/vietnamese were dead weight.
 export const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
@@ -33,7 +33,7 @@ export const plexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
-// Self-hosted Arabic face (Asal). .woff fallback dropped â€” every modern
+// Self-hosted Arabic face (Asal). .woff fallback dropped — every modern
 // browser speaks woff2 and the duplicate file was preloaded alongside it.
 export const asalArabic = localFont({
   src: [{ path: "../public/fonts/asal-arabic.woff2", weight: "500", style: "normal" }],

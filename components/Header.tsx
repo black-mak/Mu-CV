@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState } from "react";
 import { useI18n } from "@/lib/i18n";
@@ -24,6 +24,16 @@ export default function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Escape closes the mobile menu
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
 
   useEffect(() => {
     const ids = LINKS.map((l) => l.href.slice(1)).concat("contact");
@@ -84,7 +94,7 @@ export default function Header() {
           </a>
           <a href="#contact" className="btn btn-light">
             <span>{t("nav.contact")}</span>
-            <span aria-hidden="true">â†—</span>
+            <span aria-hidden="true">↗</span>
           </a>
         </nav>
 
@@ -116,6 +126,7 @@ export default function Header() {
           open ? "grid-rows-[1fr] py-8 opacity-100" : "grid-rows-[0fr] py-0 opacity-0"
         }`}
         aria-hidden={!open}
+        {...(!open ? { inert: "" as unknown as boolean } : {})}
       >
         <nav className="flex min-h-0 flex-col gap-6 overflow-hidden" aria-label="Mobile navigation">
           {LINKS.map((l) => (
