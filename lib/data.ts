@@ -1,4 +1,4 @@
-﻿// ============================================================================
+// ============================================================================
 // BLACK-MAK® — Online CV  ·  Single source of truth
 // All copy is bilingual (EN/AR). Data sourced from the ATS résumé.
 // ============================================================================
@@ -26,7 +26,6 @@ export const profile = {
   phone: "+20 100 246 2821",
   phoneRaw: "+201002462821",
   whatsapp: "https://wa.me/201002462821",
-  instapay: "+20 111 698 7764",
   cvPdf: "/cv/muhamed-alaa-cv.pdf",
   vcf: "/muhamed-alaa.vcf",
 };

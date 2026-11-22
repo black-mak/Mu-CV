@@ -34,7 +34,6 @@ export default function Contact() {
   const rows: Row[] = [
     { key: "email", label: t("contact.email"), value: profile.email, copy: profile.email, href: `mailto:${profile.email}` },
     { key: "wa", label: t("contact.phone"), value: profile.phone, copy: profile.phoneRaw, href: profile.whatsapp, openLabel: t("contact.whatsapp") },
-    { key: "instapay", label: t("contact.instapay"), value: profile.instapay, copy: profile.instapay },
     { key: "behance", label: t("contact.behance"), value: "Muhmed-alaa-el-bank", href: "https://www.behance.net/Muhmed-alaa-el-bank", openLabel: t("contact.open") },
     { key: "loc", label: t("contact.location"), value: pick(profile.location) },
   ];
