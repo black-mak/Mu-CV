@@ -14,8 +14,10 @@ export default function MagicLayer() {
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // 1 — word rise
-    if (!reduce) {
+    // 1 — word rise (Latin only; splitting Arabic text breaks joining)
+    const isArabic = () =>
+      (document.documentElement.lang || "").toLowerCase().indexOf("ar") === 0;
+    if (!reduce && !isArabic()) {
       document.querySelectorAll<HTMLElement>("[data-words]").forEach((el) => {
         if (el.dataset.split === "done") return;
         const walk = (node: Node) => {

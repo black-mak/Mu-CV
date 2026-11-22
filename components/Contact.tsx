@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useI18n } from "@/lib/i18n";
 import { profile, STUDIO_URL } from "@/lib/data";
+import { sound } from "@/lib/sound";
 import Reveal from "./Reveal";
 
 type Row = {
@@ -17,12 +18,16 @@ type Row = {
 export default function Contact() {
   const { t, pick, lang } = useI18n();
   const [copied, setCopied] = useState<string | null>(null);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  const copy = async (key: string, value: string) => {
+  const copy = async (key: string, value: string, label: string) => {
     try {
       await navigator.clipboard.writeText(value);
+      sound.click("crisp");
       setCopied(key);
-      setTimeout(() => setCopied((c) => (c === key ? null : c)), 1600);
+      setToastMessage(lang === "ar" ? `تم نسخ ${label} إلى الحافظة بنجاح` : `Copied ${label} to clipboard`);
+      setTimeout(() => setCopied((c) => (c === key ? null : c)), 2000);
+      setTimeout(() => setToastMessage(null), 3000);
     } catch {}
   };
 
@@ -35,8 +40,19 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="section">
+    <section id="contact" className="section relative">
       <div className="container">
+        {/* Floating Toast Notification */}
+        {toastMessage && (
+          <div className="fixed bottom-6 right-6 z-[150] flex items-center gap-3 border border-seal bg-surface/95 px-5 py-3 shadow-[0_12px_40px_rgba(0,0,0,0.6)] backdrop-blur-md transition-all duration-300">
+            <span className="h-2 w-2 rounded-full bg-seal animate-ping" />
+            <span className="mono text-[0.72rem] text-ink font-semibold">{toastMessage}</span>
+          </div>
+        )}
+
+        <span className="sr-only" aria-live="polite">
+          {copied ? t("contact.copied") : ""}
+        </span>
         <Reveal>
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
@@ -64,11 +80,11 @@ export default function Contact() {
                   <div className="flex shrink-0 items-center gap-2">
                     {r.copy && (
                       <button
-                        onClick={() => copy(r.key, r.copy!)}
+                        onClick={() => copy(r.key, r.copy!, r.label)}
                         className="border border-line-strong px-3 py-2 mono text-[0.62rem] uppercase tracking-widest text-muted transition-colors hover:border-ink hover:text-ink"
                       >
                         {copied === r.key ? (
-                          <span className="inline-flex items-center gap-1.5">
+                          <span className="inline-flex items-center gap-1.5 text-seal">
                             <svg viewBox="0 0 24 24" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                               <path d="M20 6 9 17l-5-5" />
                             </svg>
@@ -84,6 +100,7 @@ export default function Contact() {
                         href={r.href}
                         target={r.href.startsWith("http") ? "_blank" : undefined}
                         rel={r.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                        onClick={() => sound.click("pop")}
                         className="border border-line-strong px-3 py-2 mono text-[0.62rem] uppercase tracking-widest text-muted transition-colors hover:border-ink hover:text-ink"
                       >
                         {r.openLabel ?? t("contact.open")}
@@ -95,20 +112,42 @@ export default function Contact() {
             ))}
           </div>
 
-          {/* actions + QR card */}
+          {/* actions + dual resume + QR card */}
           <Reveal delay={0.12}>
             <div className="flex h-full flex-col justify-between gap-6 border border-line bg-surface p-7">
               <div>
                 <span className="eyebrow block">{profile.alias}</span>
                 <p className="mt-4 text-[1.05rem] leading-relaxed text-muted">{t("contact.actionsNote")}</p>
               </div>
+
+              {/* Dual Resume Download options */}
               <div className="flex flex-col gap-3">
-                <a href={profile.cvPdf} download className="btn btn-light w-full">
-                  <span>{t("contact.downloadPdf")}</span>
+                <a
+                  href={profile.cvPdf}
+                  download="Muhamed-Alaa-Visual-CV.pdf"
+                  onClick={() => sound.click("crisp")}
+                  className="btn btn-light w-full"
+                >
+                  <span>{lang === "ar" ? "تحميل السيرة الذاتية البصرية (PDF)" : "Executive Visual CV (PDF)"}</span>
                   <span aria-hidden="true">⇩</span>
                 </a>
-                <a href={STUDIO_URL} target="_blank" rel="noopener noreferrer" className="btn btn-ghost w-full">
-                  <span>{lang === "ar" ? "زيارة الاستوديو" : "Visit the studio"}</span>
+                <a
+                  href="/cv/muhamed-alaa-ats-cv.docx"
+                  download="Muhamed-Alaa-ATS-CV.docx"
+                  onClick={() => sound.click("soft")}
+                  className="btn btn-ghost w-full border-line-strong text-[0.64rem]"
+                >
+                  <span>{lang === "ar" ? "تحميل نسخة الـ ATS للشركات (.DOCX)" : "ATS-Friendly Resume (.DOCX)"}</span>
+                  <span aria-hidden="true">⇩</span>
+                </a>
+                <a
+                  href={STUDIO_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => sound.click("pop")}
+                  className="btn btn-ghost w-full border-line"
+                >
+                  <span>{lang === "ar" ? "زيارة الاستوديو الكامل" : "Visit the studio"}</span>
                   <span aria-hidden="true">↗</span>
                 </a>
               </div>

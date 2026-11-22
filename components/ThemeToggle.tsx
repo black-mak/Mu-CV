@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useI18n } from "@/lib/i18n";
+import { sound } from "@/lib/sound";
 
 export default function ThemeToggle() {
   const { t } = useI18n();
@@ -12,6 +13,7 @@ export default function ThemeToggle() {
   }, []);
 
   const toggle = () => {
+    sound.click("crisp");
     const next = !light;
     setLight(next);
     if (next) document.documentElement.dataset.theme = "light";

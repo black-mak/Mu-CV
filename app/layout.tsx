@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Muhamed Alaa — CV | BLACK-MAK®",
     description:
-      "Logo & Visual Identity Designer with 12+ years across Arabic & Latin identity systems. This is the person — the studio holds the work.",
+      "The online CV of Muhamed Alaa (BLACK-MAK®): Logo & Visual Identity Designer with 12+ years across Arabic & Latin identity systems. Bilingual EN/AR.",
     type: "profile",
     url: SITE_URL,
     siteName: "BLACK-MAK® CV",
@@ -104,7 +104,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body id="top">
+      <body>
         <a
           href="#top"
           className="sr-only focus:not-sr-only focus:fixed focus:left-2 focus:top-2 focus:z-[300] focus:border focus:border-line-strong focus:bg-bg focus:px-4 focus:py-2 focus:text-ink"

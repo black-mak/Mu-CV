@@ -29,10 +29,10 @@ const UI = {
   "section.connect": { en: "Connect", ar: "تواصل" },
 
   "idx.about": { en: "01 / ABOUT", ar: "٠١ / نبذة" },
-  "idx.skills": { en: "02 / SKILLS", ar: "٠٢ / المهارات" },
-  "idx.experience": { en: "03 / EXPERIENCE", ar: "٠٣ / الخبرة" },
-  "idx.credentials": { en: "04 / CREDENTIALS", ar: "٠٤ / الشهادات" },
-  "idx.contact": { en: "05 / CONTACT", ar: "٠٥ / التواصل" },
+  "idx.skills": { en: "03 / SKILLS", ar: "٠٣ / المهارات" },
+  "idx.experience": { en: "04 / EXPERIENCE", ar: "٠٤ / الخبرة" },
+  "idx.credentials": { en: "05 / CREDENTIALS", ar: "٠٥ / الشهادات" },
+  "idx.contact": { en: "06 / CONTACT", ar: "٠٦ / التواصل" },
 
   "cred.note": {
     en: "Formal training and continuous learning that support the practice. Click any card to view the certificate.",

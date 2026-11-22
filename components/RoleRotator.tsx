@@ -1,72 +1,18 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
 import { useI18n } from "@/lib/i18n";
 import { profile } from "@/lib/data";
 
-// Typewriter that cycles the role + specialist titles.
-// Respects reduced-motion (falls back to a static joined string).
-// Renders the first word server-side / pre-JS so screen readers and
-// no-JS visitors always get real text (never an empty blinking cursor).
+// Keep the primary role complete at every viewport and at every moment.
+// The former typewriter exposed partial job titles to assistive technology
+// and weakened the first-screen positioning while it was deleting text.
 export default function RoleRotator() {
-  const { lang, pick } = useI18n();
-
-  const words = useMemo(() => {
-    const list = [pick(profile.role), ...(lang === "ar" ? profile.titles.ar : profile.titles.en)];
-    return list;
-  }, [lang, pick]);
-
-  const [i, setI] = useState(0);
-  // SSR-safe seed: the first word is visible before any JS runs.
-  const [text, setText] = useState(() => (typeof window === "undefined" ? words[0] : ""));
-  const [deleting, setDeleting] = useState(false);
-  const reduce = useRef(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    reduce.current = mq;
-    if (mq) {
-      setText(words[0]);
-      return;
-    }
-    // start the typewriter cycle from a clean state on the client
-    setText("");
-  }, [words]);
-
-  useEffect(() => {
-    if (reduce.current) return;
-    const current = words[i % words.length];
-    const done = text === current;
-    const empty = text === "";
-
-    let delay = deleting ? 40 : 75;
-    if (done && !deleting) delay = 1600;
-    if (empty && deleting) delay = 250;
-
-    const timer = setTimeout(() => {
-      if (!deleting && done) {
-        setDeleting(true);
-      } else if (deleting && empty) {
-        setDeleting(false);
-        setI((n) => (n + 1) % words.length);
-      } else {
-        const next = deleting
-          ? current.slice(0, text.length - 1)
-          : current.slice(0, text.length + 1);
-        setText(next);
-      }
-    }, delay);
-
-    return () => clearTimeout(timer);
-  }, [text, deleting, i, words]);
+  const { pick } = useI18n();
 
   return (
-    <p className="mono flex min-h-[1.4em] items-center gap-2 text-[0.82rem] uppercase tracking-[0.14em] text-ink">
-      <span className="inline-block h-[6px] w-[6px] bg-seal" aria-hidden="true" />
-      <span>{text || words[0]}</span>
-      {!reduce.current && (
-        <span className="ml-[1px] inline-block h-[1em] w-[2px] animate-pulse bg-ink align-middle" aria-hidden="true" />
-      )}
+    <p className="mono flex min-h-[1.4em] items-start gap-2 text-[0.82rem] uppercase tracking-[0.14em] text-ink">
+      <span className="mt-[0.55em] inline-block h-[6px] w-[6px] shrink-0 bg-seal" aria-hidden="true" />
+      <span>{pick(profile.role)}</span>
     </p>
   );
 }

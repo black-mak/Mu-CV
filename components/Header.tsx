@@ -2,11 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { useI18n } from "@/lib/i18n";
+import { sound } from "@/lib/sound";
 import BrandMark from "./BrandMark";
 import ThemeToggle from "./ThemeToggle";
 
 const LINKS = [
   { href: "#about", k: "nav.about" as const },
+  { href: "#selected-work", k: "idx.work" as const, fallback: "Selected Marks", arFallback: "الأعمال" },
   { href: "#skills", k: "nav.skills" as const },
   { href: "#experience", k: "nav.experience" as const },
   { href: "#credentials", k: "nav.credentials" as const },
@@ -52,6 +54,16 @@ export default function Header() {
     return () => obs.disconnect();
   }, []);
 
+  const handleLangToggle = () => {
+    sound.click("crisp");
+    setLang(lang === "ar" ? "en" : "ar");
+  };
+
+  const handleMenuToggle = () => {
+    sound.click("pop");
+    setOpen((o) => !o);
+  };
+
   return (
     <header
       dir="ltr"
@@ -59,11 +71,12 @@ export default function Header() {
         scrolled ? "border-line bg-bg/85 backdrop-blur-xl" : "border-transparent"
       }`}
     >
-      <div className="container flex min-h-[76px] items-center justify-between gap-8">
+      <div className="container flex min-h-[76px] items-center justify-between gap-2 md:gap-8">
         <a
           href="#top"
           onClick={(e) => {
             e.preventDefault();
+            sound.click("soft");
             window.scrollTo({ top: 0, behavior: "smooth" });
           }}
           aria-label="BLACK-MAK home"
@@ -76,23 +89,29 @@ export default function Header() {
             <a
               key={l.href}
               href={l.href}
+              onClick={() => sound.click("soft")}
               className={`mono text-[0.68rem] uppercase tracking-[0.16em] transition-colors hover:text-ink ${
-                active === l.href.slice(1) ? "text-ink" : "text-muted"
+                active === l.href.slice(1) ? "text-ink font-semibold" : "text-muted"
               }`}
-              aria-current={active === l.href.slice(1) ? "true" : undefined}
+              aria-current={active === l.href.slice(1) ? "location" : undefined}
             >
-              {t(l.k)}
+              {l.k === "idx.work" ? (lang === "ar" ? l.arFallback : l.fallback) : t(l.k)}
             </a>
           ))}
           <a
             href="https://black-mak.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => sound.click("crisp")}
             className="mono text-[0.68rem] uppercase tracking-[0.16em] text-muted transition-colors hover:text-ink"
           >
             {t("nav.studio")}
           </a>
-          <a href="#contact" className="btn btn-light">
+          <a
+            href="#contact"
+            onClick={() => sound.click("crisp")}
+            className="btn btn-light"
+          >
             <span>{t("nav.contact")}</span>
             <span aria-hidden="true">↗</span>
           </a>
@@ -102,7 +121,7 @@ export default function Header() {
           <ThemeToggle />
           <button
             type="button"
-            onClick={() => setLang(lang === "ar" ? "en" : "ar")}
+            onClick={handleLangToggle}
             aria-label="Switch language"
             className="grid h-10 place-items-center border border-line-strong px-3 mono text-[0.7rem] text-muted transition-colors hover:border-ink hover:text-ink"
           >
@@ -110,7 +129,7 @@ export default function Header() {
           </button>
           <button
             type="button"
-            onClick={() => setOpen((o) => !o)}
+            onClick={handleMenuToggle}
             aria-label="Toggle menu"
             aria-expanded={open}
             className="grid h-11 w-11 place-items-center border border-line-strong md:hidden"
@@ -130,20 +149,38 @@ export default function Header() {
       >
         <nav className="flex min-h-0 flex-col gap-6 overflow-hidden" aria-label="Mobile navigation">
           {LINKS.map((l) => (
-            <a key={l.href} href={l.href} onClick={() => setOpen(false)} className={`text-2xl font-bold transition-all duration-500 ${open ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"}`}>
-              {t(l.k)}
+            <a
+              key={l.href}
+              href={l.href}
+              onClick={() => {
+                sound.click("soft");
+                setOpen(false);
+              }}
+              className={`text-2xl font-bold transition-all duration-500 ${open ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"}`}
+            >
+              {l.k === "idx.work" ? (lang === "ar" ? l.arFallback : l.fallback) : t(l.k)}
             </a>
           ))}
           <a
             href="https://black-mak.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => setOpen(false)}
+            onClick={() => {
+              sound.click("crisp");
+              setOpen(false);
+            }}
             className={`text-2xl font-bold transition-all duration-500 ${open ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"}`}
           >
             {t("nav.studio")}
           </a>
-          <a href="#contact" onClick={() => setOpen(false)} className="btn btn-light w-full">
+          <a
+            href="#contact"
+            onClick={() => {
+              sound.click("crisp");
+              setOpen(false);
+            }}
+            className="btn btn-light w-full"
+          >
             {t("nav.contact")}
           </a>
         </nav>

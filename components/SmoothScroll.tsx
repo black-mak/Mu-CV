@@ -27,6 +27,7 @@ export default function SmoothScroll() {
         easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         smoothWheel: true,
       });
+      document.documentElement.classList.add("has-smooth");
       const loop = (time: number) => {
         lenis?.raf(time);
         raf = requestAnimationFrame(loop);
@@ -56,6 +57,7 @@ export default function SmoothScroll() {
     return () => {
       cancelled = true;
       cancelAnimationFrame(raf);
+      document.documentElement.classList.remove("has-smooth");
       (window as unknown as { __lenisCleanup?: () => void }).__lenisCleanup?.();
       lenis?.destroy();
     };

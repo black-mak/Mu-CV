@@ -1,4 +1,4 @@
-// ============================================================================
+﻿// ============================================================================
 // BLACK-MAK® — Online CV  ·  Single source of truth
 // All copy is bilingual (EN/AR). Data sourced from the ATS résumé.
 // ============================================================================
@@ -6,7 +6,7 @@
 export type Lang = "en" | "ar";
 export type Bi = { en: string; ar: string };
 
-export const STUDIO_URL = "https://black-mak.vercel.app/";
+export const STUDIO_URL = "https://black-mak.vercel.app";
 
 export const profile = {
   name: { en: "MUHAMED ALAA", ar: "محمد علاء" },

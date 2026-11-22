@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
@@ -9,14 +9,43 @@ import Reveal from "./Reveal";
 
 function CertModal({ cert, onClose }: { cert: Cert; onClose: () => void }) {
   const { t, pick } = useI18n();
+  const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    const previousFocus = document.activeElement as HTMLElement | null;
+    const panel = panelRef.current;
+    const getFocusable = () =>
+      Array.from(
+        panel?.querySelectorAll<HTMLElement>(
+          'button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        ) ?? []
+      ).filter((el) => !el.hasAttribute("disabled"));
+    getFocusable()[0]?.focus();
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const focusable = getFocusable();
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
+      previousFocus?.focus();
     };
   }, [onClose]);
 
@@ -31,8 +60,15 @@ function CertModal({ cert, onClose }: { cert: Cert; onClose: () => void }) {
       aria-modal="true"
       aria-label={pick(cert.title)}
     >
-      <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={onClose} />
+      <button
+        type="button"
+        className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+        onClick={onClose}
+        aria-label={t("cred.close")}
+        tabIndex={-1}
+      />
       <motion.div
+        ref={panelRef}
         className="relative z-10 flex max-h-[90vh] w-full max-w-3xl flex-col border border-line bg-bg"
         initial={{ scale: 0.96, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
