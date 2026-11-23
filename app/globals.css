@@ -184,7 +184,7 @@ ul {
     transform 0.3s var(--ease), border-color 0.3s var(--ease);
 }
 .btn:hover {
-  transform: translateY(-3px);
+  transform: none;
 }
 .btn-light {
   background: var(--ink);
@@ -201,8 +201,9 @@ ul {
   color: var(--ink);
 }
 .btn-ghost:hover {
-  background: var(--ink);
-  color: var(--bg);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.7);
+  color: #ffffff;
 }
 
 .text-link {

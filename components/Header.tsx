@@ -10,6 +10,7 @@ const LINKS = [
   { href: "#about", k: "nav.about" as const },
   { href: "#selected-work", k: "idx.work" as const, fallback: "Selected Marks", arFallback: "الأعمال" },
   { href: "#skills", k: "nav.skills" as const },
+  { href: "#proprietary-tooling", k: "nav.tooling" as const, fallback: "R&D Tooling", arFallback: "أدوات العمل" },
   { href: "#experience", k: "nav.experience" as const },
   { href: "#credentials", k: "nav.credentials" as const },
 ];
@@ -96,7 +97,7 @@ export default function Header() {
               }`}
               aria-current={active === l.href.slice(1) ? "location" : undefined}
             >
-              {l.k === "idx.work" ? (lang === "ar" ? l.arFallback : l.fallback) : t(l.k)}
+              {l.fallback ? (lang === "ar" ? l.arFallback : l.fallback) : t(l.k as any)}
             </a>
           ))}
           <a
@@ -172,7 +173,7 @@ export default function Header() {
               }}
               className={`text-2xl font-bold transition-all duration-500 ${open ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"}`}
             >
-              {l.k === "idx.work" ? (lang === "ar" ? l.arFallback : l.fallback) : t(l.k)}
+              {l.fallback ? (lang === "ar" ? l.arFallback : l.fallback) : t(l.k as any)}
             </a>
           ))}
           <a
