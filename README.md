@@ -1,4 +1,4 @@
-﻿# BLACK-MAKÃ‚Â® Ã¢â‚¬â€ Online CV
+﻿# BLACK-MAK  Online CV
 
 ### Ã¢â€“Â¶ View the live CV: **https://muhamed-cv.vercel.app**
 
