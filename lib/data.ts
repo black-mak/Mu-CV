@@ -3,6 +3,8 @@
 // All copy is bilingual (EN/AR). Data sourced from the ATS résumé.
 // ============================================================================
 
+import { assetPath } from "./basePath";
+
 export type Lang = "en" | "ar";
 export type Bi = { en: string; ar: string };
 
@@ -26,8 +28,8 @@ export const profile = {
   phone: "+20 100 246 2821",
   phoneRaw: "+201002462821",
   whatsapp: "https://wa.me/201002462821",
-  cvPdf: "/cv/muhamed-alaa-cv.pdf",
-  vcf: "/muhamed-alaa.vcf",
+  cvPdf: assetPath("/cv/muhamed-alaa-cv.pdf"),
+  vcf: assetPath("/muhamed-alaa.vcf"),
 };
 
 // Punchy hero copy — echoes the studio's brand voice ("Marks with meaning").
@@ -236,8 +238,8 @@ export const certificates: Cert[] = [
     title: { en: "Graphic Design Diploma", ar: "دبلومة التصميم الجرافيكي" },
     org: { en: "Russian Cultural Center", ar: "المركز الثقافي الروسي" },
     note: { en: "Completed with grade of Excellent", ar: "أُنجزت بتقدير ممتاز" },
-    thumb: "/certs/graphic-thumb.webp",
-    full: "/certs/graphic.webp",
+    thumb: assetPath("/certs/graphic-thumb.webp"),
+    full: assetPath("/certs/graphic.webp"),
   },
   {
     year: "2022",
@@ -245,8 +247,8 @@ export const certificates: Cert[] = [
     title: { en: "General English Course — 132 Hours", ar: "دورة اللغة الإنجليزية العامة — ١٣٢ ساعة" },
     org: { en: "The British Cultural Center", ar: "المركز الثقافي البريطاني" },
     note: { en: "132 hours of certified instruction", ar: "١٣٢ ساعة تدريب معتمدة" },
-    thumb: "/certs/english-thumb.webp",
-    full: "/certs/english.webp",
+    thumb: assetPath("/certs/english-thumb.webp"),
+    full: assetPath("/certs/english.webp"),
   },
   {
     year: "2022",
@@ -254,8 +256,8 @@ export const certificates: Cert[] = [
     title: { en: "Fundamentals of Digital Transformation (FDTC)", ar: "أساسيات التحول الرقمي (FDTC)" },
     org: { en: "BCCIT Academy", ar: "أكاديمية BCCIT" },
     note: { en: "Certified training in digital transformation", ar: "تدريب معتمد في التحول الرقمي" },
-    thumb: "/certs/fdtc-thumb.webp",
-    full: "/certs/fdtc.webp",
+    thumb: assetPath("/certs/fdtc-thumb.webp"),
+    full: assetPath("/certs/fdtc.webp"),
   },
 ];
 

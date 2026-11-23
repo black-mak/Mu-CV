@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
 import { STUDIO_URL } from "@/lib/data";
 import { sound } from "@/lib/sound";
+import { assetPath } from "@/lib/basePath";
 import Reveal from "./Reveal";
 
 const FEATURED_MARKS = [
@@ -12,28 +13,28 @@ const FEATURED_MARKS = [
     id: "01",
     title: { en: "1.1", ar: "١.١ — ون بوينت ون" },
     tag: { en: "Visual Identity & Apparel", ar: "هوية بصرية وعلامة أزياء" },
-    image: "/images/work/one-point-one-thumb.png",
+    image: assetPath("/images/work/one-point-one-thumb.png"),
     link: `${STUDIO_URL}/work/one-point-one`,
   },
   {
     id: "02",
     title: { en: "BLACK MAK", ar: "بلاك ماك" },
     tag: { en: "Studio Visual Identity & System", ar: "الهوية البصرية ونظام الاستوديو" },
-    image: "/images/work/black-mak-thumb.jpg",
+    image: assetPath("/images/work/black-mak-thumb.jpg"),
     link: `${STUDIO_URL}/work/black-mak-identity`,
   },
   {
     id: "03",
     title: { en: "MAKEEN", ar: "مَـكِـيـنْ" },
     tag: { en: "Arabic Calligraphy & Wordmark", ar: "خط عربي حر ولوجوتايب" },
-    image: "/images/work/makeen-thumb.jpg",
+    image: assetPath("/images/work/makeen-thumb.jpg"),
     link: `${STUDIO_URL}/work/makeen`,
   },
   {
     id: "04",
     title: { en: "CALLIGRAPHY WORK", ar: "أعمال الخط العربي" },
     tag: { en: "Contemporary Arabic Letterforms", ar: "كاليجرافي وتكوينات خطية معاصرة" },
-    image: "/images/work/calligraphy-thumb.jpg",
+    image: assetPath("/images/work/calligraphy-thumb.jpg"),
     link: `${STUDIO_URL}/work/calligraphi-works`,
   },
 ];

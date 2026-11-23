@@ -1,11 +1,15 @@
 /** @type {import('next').NextConfig} */
 const isPages = process.env.GITHUB_ACTIONS === "true";
+const basePath = isPages ? "/cv" : "";
 
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   compress: true,
-  ...(isPages ? { output: "export", basePath: "/cv" } : {}),
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
+  },
+  ...(isPages ? { output: "export", basePath, assetPrefix: basePath } : {}),
   images: {
     unoptimized: isPages,
     formats: ["image/avif", "image/webp"],

@@ -6,6 +6,7 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
 import { profile, hero } from "@/lib/data";
 import { sound } from "@/lib/sound";
+import { assetPath } from "@/lib/basePath";
 import Reveal from "./Reveal";
 import RoleRotator from "./RoleRotator";
 
@@ -141,7 +142,7 @@ export default function Hero() {
             >
               <div className="relative h-full w-full overflow-hidden">
                 <Image
-                  src="/portrait.webp"
+                  src={assetPath("/portrait.webp")}
                   alt={pick(profile.name)}
                   fill
                   priority

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useI18n } from "@/lib/i18n";
 import { profile, STUDIO_URL } from "@/lib/data";
 import { sound } from "@/lib/sound";
+import { assetPath } from "@/lib/basePath";
 import Reveal from "./Reveal";
 
 type Row = {
@@ -131,7 +132,7 @@ export default function Contact() {
                   <span aria-hidden="true">⇩</span>
                 </a>
                 <a
-                  href="/cv/muhamed-alaa-ats-cv.docx"
+                  href={assetPath("/cv/muhamed-alaa-ats-cv.docx")}
                   download="Muhamed-Alaa-ATS-CV.docx"
                   onClick={() => sound.click("soft")}
                   className="btn btn-ghost w-full border-line-strong text-[0.64rem]"
@@ -161,7 +162,7 @@ export default function Contact() {
                   className="shrink-0 border border-line-strong bg-bg p-2 transition-colors hover:border-ink"
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/qr-cv.svg" alt="QR code — muhamed-cv.vercel.app" width="104" height="104" className="block" />
+                  <img src={assetPath("/qr-cv.svg")} alt="QR code — muhamed-cv.vercel.app" width="104" height="104" className="block" />
                 </a>
                 <p className="mono text-[0.58rem] uppercase leading-relaxed tracking-[0.12em] text-faint">
                   {t("contact.qrNote")}
