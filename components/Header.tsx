@@ -99,7 +99,7 @@ export default function Header() {
             </a>
           ))}
           <a
-            href="https://black-mak.vercel.app/"
+            href="https://black-mak.github.io/"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => sound.click("crisp")}
@@ -162,7 +162,7 @@ export default function Header() {
             </a>
           ))}
           <a
-            href="https://black-mak.vercel.app/"
+            href="https://black-mak.github.io/"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => {

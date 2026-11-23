@@ -6,7 +6,7 @@
 export type Lang = "en" | "ar";
 export type Bi = { en: string; ar: string };
 
-export const STUDIO_URL = "https://black-mak.vercel.app";
+export const STUDIO_URL = "https://black-mak.github.io";
 
 export const profile = {
   name: { en: "MUHAMED ALAA", ar: "محمد علاء" },
@@ -291,7 +291,7 @@ export type Social = { label: string; href: string; handle: string };
 export const socials: Social[] = [
   { label: "Behance", href: "https://www.behance.net/Muhmed-alaa-el-bank", handle: "Muhmed-alaa-el-bank" },
   { label: "Instagram", href: "https://www.instagram.com/muhamedalaaelbank/", handle: "muhamedalaaelbank" },
-  { label: "Studio", href: "https://black-mak.vercel.app/", handle: "black-mak.vercel.app" },
+  { label: "Studio", href: "https://black-mak.github.io/", handle: "black-mak.github.io" },
 ];
 
 // The finale — the bridge from "this is who I am" to "this is my work".
@@ -307,5 +307,5 @@ export const seal = {
   },
   center: { en: "EXPLORE BLACK-MAK STUDIO", ar: "استكشف استوديو BLACK-MAK" },
   // ring text now lives in SealCTA (bilingual, closed-circle solved at runtime)
-  domain: "black-mak.vercel.app",
+  domain: "black-mak.github.io",
 };
