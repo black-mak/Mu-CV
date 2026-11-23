@@ -1,12 +1,13 @@
 /** @type {import('next').NextConfig} */
+const isPages = process.env.GITHUB_ACTIONS === "true";
+
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   compress: true,
-  output: "export",
-  basePath: "/cv",
+  ...(isPages ? { output: "export", basePath: "/cv" } : {}),
   images: {
-    unoptimized: true,
+    unoptimized: isPages,
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
       {
