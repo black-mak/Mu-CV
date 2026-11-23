@@ -7,9 +7,53 @@ import { experience, education } from "@/lib/data";
 import { sound } from "@/lib/sound";
 import Reveal from "./Reveal";
 
+const MILESTONES = [
+  {
+    id: "2014",
+    years: "2014 — 2018",
+    labelEn: "Formative Practice & Calligraphy",
+    labelAr: "الممارسة المبكرة ودراسات الخط العربي",
+    targetJobIdx: 2,
+    badge: "FOUNDATION",
+  },
+  {
+    id: "2018",
+    years: "2018 — 2019",
+    labelEn: "Russian Cultural Center Diploma",
+    labelAr: "دبلومة التصميم — المركز الروسي (ممتاز)",
+    targetEduIdx: 0,
+    badge: "ACADEMIC",
+  },
+  {
+    id: "2019",
+    years: "2019 — 2023",
+    labelEn: "Operations Leadership (15+ Team)",
+    labelAr: "قيادة العمليات الميدانية والفرق (١٥+ عضواً)",
+    targetJobIdx: 1,
+    badge: "OPERATIONS",
+  },
+  {
+    id: "2021",
+    years: "2021 — 2022",
+    labelEn: "British Cultural Center (132h English)",
+    labelAr: "اللغة الإنجليزية المعتمدة — المركز البريطاني",
+    targetEduIdx: 1,
+    badge: "COMMUNICATION",
+  },
+  {
+    id: "2023",
+    years: "2023 — Present",
+    labelEn: "BLACK-MAK® Studio Practice",
+    labelAr: "ممارسة الاستوديو والهويات الدولية المستقلة",
+    targetJobIdx: 0,
+    badge: "SOVEREIGN",
+  },
+];
+
 export default function Experience() {
   const { t, pick, lang } = useI18n();
   const [expanded, setExpanded] = useState<number[]>([0, 1]); // Expand top 2 by default
+  const [activeMilestone, setActiveMilestone] = useState<string>("2023");
 
   const toggleExpand = (idx: number) => {
     sound.click("soft");
@@ -24,6 +68,16 @@ export default function Experience() {
       setExpanded([]);
     } else {
       setExpanded(experience.map((_, i) => i));
+    }
+  };
+
+  const handleMilestoneClick = (m: typeof MILESTONES[0]) => {
+    sound.click("pop");
+    setActiveMilestone(m.id);
+    if (typeof m.targetJobIdx === "number") {
+      if (!expanded.includes(m.targetJobIdx)) {
+        setExpanded((prev) => [...prev, m.targetJobIdx!]);
+      }
     }
   };
 
@@ -56,8 +110,51 @@ export default function Experience() {
           </div>
         </Reveal>
 
+        {/* Interactive Milestone Scrubber (2014-2026) */}
+        <Reveal delay={0.08}>
+          <div className="mt-12 border-t border-b border-line py-5">
+            <div className="flex items-center justify-between mb-3">
+              <span className="mono text-[0.62rem] uppercase tracking-widest text-seal font-semibold">
+                {lang === "ar" ? "مسار التطور المهني (٢٠١٤ — ٢٠٢٦)" : "CAREER TRAJECTORY & MILESTONES"}
+              </span>
+              <span className="mono text-[0.62rem] text-faint">
+                {lang === "ar" ? "انقر لاستعراض المحطة" : "Click milestone to inspect"}
+              </span>
+            </div>
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-thin">
+              {MILESTONES.map((m) => {
+                const isActive = activeMilestone === m.id;
+                return (
+                  <button
+                    key={m.id}
+                    type="button"
+                    onClick={() => handleMilestoneClick(m)}
+                    className={`group shrink-0 border px-3.5 py-2 text-start transition-all ${
+                      isActive
+                        ? "border-seal bg-bg shadow-md"
+                        : "border-line bg-bg/60 hover:border-ink"
+                    }`}
+                  >
+                    <div className="flex items-center gap-2">
+                      <span className="mono text-[0.65rem] text-seal font-bold">
+                        {m.years}
+                      </span>
+                      <span className="mono text-[0.55rem] px-1.5 py-0.2 border border-line text-faint">
+                        {m.badge}
+                      </span>
+                    </div>
+                    <p className="mt-1 text-xs font-semibold text-ink group-hover:text-seal transition-colors">
+                      {lang === "ar" ? m.labelAr : m.labelEn}
+                    </p>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </Reveal>
+
         {/* Timeline */}
-        <div className="relative mt-14">
+        <div className="relative mt-12">
           <span
             className="tspine absolute bottom-2 top-2 w-px bg-line ltr:left-[7px] rtl:right-[7px] md:ltr:left-[calc(200px+7px)] md:rtl:right-[calc(200px+7px)]"
             aria-hidden="true"
