@@ -5,13 +5,15 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
 import { certificates, languages, interests, type Cert } from "@/lib/data";
+import { sound } from "@/lib/sound";
 import Reveal from "./Reveal";
 
 function CertModal({ cert, onClose }: { cert: Cert; onClose: () => void }) {
-  const { t, pick } = useI18n();
+  const { t, pick, lang } = useI18n();
   const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    sound.click("soft");
     const previousFocus = document.activeElement as HTMLElement | null;
     const panel = panelRef.current;
     const getFocusable = () =>
@@ -24,6 +26,7 @@ function CertModal({ cert, onClose }: { cert: Cert; onClose: () => void }) {
 
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
+        sound.click("crisp");
         onClose();
         return;
       }
@@ -51,7 +54,7 @@ function CertModal({ cert, onClose }: { cert: Cert; onClose: () => void }) {
 
   return (
     <motion.div
-      className="fixed inset-0 z-[200] flex items-center justify-center p-4"
+      className="fixed inset-0 z-[200] flex items-center justify-center p-3 sm:p-6"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -62,45 +65,89 @@ function CertModal({ cert, onClose }: { cert: Cert; onClose: () => void }) {
     >
       <button
         type="button"
-        className="absolute inset-0 bg-black/80 backdrop-blur-sm"
-        onClick={onClose}
+        className="absolute inset-0 bg-black/85 backdrop-blur-md"
+        onClick={() => {
+          sound.click("crisp");
+          onClose();
+        }}
         aria-label={t("cred.close")}
         tabIndex={-1}
       />
       <motion.div
         ref={panelRef}
-        className="relative z-10 flex max-h-[90vh] w-full max-w-3xl flex-col border border-line bg-bg"
-        initial={{ scale: 0.96, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.96, opacity: 0 }}
-        transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+        className="relative z-10 flex max-h-[92vh] w-full max-w-4xl flex-col border border-line-strong bg-bg shadow-2xl"
+        initial={{ scale: 0.96, opacity: 0, y: 8 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.96, opacity: 0, y: 8 }}
+        transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="flex items-center justify-between border-b border-line px-6 py-4">
-          <div>
-            <h3 className="text-base font-bold">{pick(cert.title)}</h3>
-            <p className="mono mt-1 text-[0.66rem] uppercase tracking-wider text-muted">
-              {pick(cert.org)} · {cert.years}
+        {/* Modal Header */}
+        <div className="flex items-center justify-between border-b border-line px-5 py-4 sm:px-6">
+          <div className="min-w-0 pr-3">
+            <div className="flex items-center gap-2">
+              <span className="mono text-[0.62rem] uppercase tracking-widest text-seal">
+                {lang === "ar" ? "وثيقة رسمية معتمدة" : "Official Credential"}
+              </span>
+              <span className="text-line-strong">/</span>
+              <span className="mono text-[0.62rem] text-faint">{cert.years}</span>
+            </div>
+            <h3 className="mt-1 truncate text-base font-bold sm:text-lg">{pick(cert.title)}</h3>
+            <p className="mono mt-0.5 text-[0.68rem] uppercase tracking-wider text-muted">
+              {pick(cert.org)}
             </p>
           </div>
-          <button
-            onClick={onClose}
-            aria-label={t("cred.close")}
-            className="grid h-9 w-9 shrink-0 place-items-center border border-line-strong text-lg transition-colors hover:border-ink hover:text-ink"
-          >
-            ×
-          </button>
+          <div className="flex items-center gap-3">
+            <a
+              href={cert.full}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mono hidden sm:inline-flex items-center gap-1.5 border border-line px-3 py-1.5 text-[0.65rem] uppercase tracking-wider text-muted transition-colors hover:border-ink hover:text-ink"
+            >
+              <span>{lang === "ar" ? "عرض الأصل بالدقة الكاملة" : "High-Res"}</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <button
+              onClick={() => {
+                sound.click("crisp");
+                onClose();
+              }}
+              aria-label={t("cred.close")}
+              className="grid h-10 w-10 shrink-0 place-items-center border border-line text-xl transition-colors hover:border-ink hover:text-ink"
+            >
+              ×
+            </button>
+          </div>
         </div>
-        <div className="overflow-auto p-4 md:p-6">
-          <div className="relative mx-auto aspect-[1.414/1] w-full max-w-2xl border border-line bg-surface">
+
+        {/* Modal Body */}
+        <div className="overflow-auto p-4 sm:p-6">
+          <div className="relative mx-auto aspect-[1.414/1] w-full max-w-3xl border border-line bg-surface/50 shadow-inner">
             <Image
               src={cert.full}
               alt={pick(cert.title)}
               fill
-              sizes="(max-width: 768px) 92vw, 700px"
+              sizes="(max-width: 768px) 94vw, 800px"
               className="object-contain"
             />
           </div>
-          <p className="mt-4 text-center text-sm text-muted">{pick(cert.note)}</p>
+          <div className="mt-4 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-line/60 pt-4">
+            <p className="text-center sm:text-start text-xs sm:text-sm text-muted">
+              {pick(cert.note)}
+            </p>
+            <div className="flex items-center gap-2">
+              <span className="mono text-[0.6rem] uppercase tracking-wider text-faint hidden sm:inline-block">
+                Press ESC to close
+              </span>
+              <a
+                href={cert.full}
+                download
+                className="mono inline-flex items-center gap-1.5 border border-line px-3 py-1.5 text-[0.65rem] uppercase tracking-wider text-muted transition-colors hover:border-ink hover:text-ink sm:hidden"
+              >
+                <span>{lang === "ar" ? "فتح بدقة كاملة" : "Open Original"}</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
         </div>
       </motion.div>
     </motion.div>
@@ -131,8 +178,11 @@ export default function Credentials() {
           {certificates.map((cert, i) => (
             <Reveal key={i} delay={i * 0.08}>
               <button
-                onClick={() => setOpenIdx(i)}
-                className="cert-lift group block h-full w-full border border-line bg-bg p-5 text-start transition-all duration-300 hover:border-ink hover:shadow-[0_8px_30px_rgba(0,0,0,0.35)]"
+                onClick={() => {
+                  sound.click("soft");
+                  setOpenIdx(i);
+                }}
+                className="cert-lift group block h-full w-full border border-line bg-bg p-5 text-start transition-all duration-300 hover:border-ink hover:shadow-[0_8px_30px_rgba(0,0,0,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink"
               >
                 <div className="relative mb-5 aspect-[4/3] overflow-hidden border border-line">
                   <Image

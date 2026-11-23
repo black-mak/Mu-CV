@@ -1,111 +1,180 @@
 "use client";
 
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
 import { experience, education } from "@/lib/data";
+import { sound } from "@/lib/sound";
 import Reveal from "./Reveal";
 
 export default function Experience() {
-  const { t, pick } = useI18n();
+  const { t, pick, lang } = useI18n();
+  const [expanded, setExpanded] = useState<number[]>([0, 1]); // Expand top 2 by default
+
+  const toggleExpand = (idx: number) => {
+    sound.click("soft");
+    setExpanded((prev) =>
+      prev.includes(idx) ? prev.filter((i) => i !== idx) : [...prev, idx]
+    );
+  };
+
+  const toggleAll = () => {
+    sound.click("crisp");
+    if (expanded.length === experience.length) {
+      setExpanded([]);
+    } else {
+      setExpanded(experience.map((_, i) => i));
+    }
+  };
 
   return (
     <section id="experience" className="section border-b border-line bg-surface">
       <div className="container">
         <Reveal>
-          <span className="eyebrow block">{t("idx.experience")}</span>
-          <h2 className="display mt-6 text-[clamp(2.4rem,6vw,4.4rem)]">
-            {t("section.experience")}
-          </h2>
+          <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+            <div>
+              <span className="eyebrow block">{t("idx.experience")}</span>
+              <h2 className="display mt-6 text-[clamp(2.4rem,6vw,4.4rem)]">
+                {t("section.experience")}
+              </h2>
+            </div>
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={toggleAll}
+                className="border border-line-strong px-3.5 py-1.5 mono text-[0.66rem] uppercase tracking-wider text-muted hover:border-ink hover:text-ink transition-colors"
+              >
+                {expanded.length === experience.length
+                  ? lang === "ar"
+                    ? "طي الكل −"
+                    : "Collapse All −"
+                  : lang === "ar"
+                  ? "توسيع الكل +"
+                  : "Expand All +"}
+              </button>
+            </div>
+          </div>
         </Reveal>
 
-        {/* timeline */}
+        {/* Timeline */}
         <div className="relative mt-14">
           <span
             className="tspine absolute bottom-2 top-2 w-px bg-line ltr:left-[7px] rtl:right-[7px] md:ltr:left-[calc(200px+7px)] md:rtl:right-[calc(200px+7px)]"
             aria-hidden="true"
           />
           <div className="flex flex-col gap-12">
-            {experience.map((job, i) => (
-              <Reveal key={i} delay={i * 0.08}>
-                {pick(job.tag).toLowerCase().includes("leadership") ? (
+            {experience.map((job, i) => {
+              const isOpen = expanded.includes(i);
+              return (
+                <Reveal key={i} delay={i * 0.08}>
                   <article className="print-avoid-break grid grid-cols-1 gap-4 md:grid-cols-[200px_1fr] md:gap-12">
+                    {/* Left Date Rail */}
                     <div className="mono flex items-start gap-4 text-sm text-muted md:flex-col md:gap-2">
-                      <span className="order-2 md:order-1">
+                      <span className="order-2 md:order-1 font-semibold text-ink/90">
                         {job.from} — {pick(job.to)}
                       </span>
                       <span className="order-1 mt-[5px] inline-block h-[15px] w-[15px] shrink-0 rounded-full border-2 border-seal bg-bg md:order-2 md:hidden" />
-                      <span className="order-3 inline-block border border-line-strong px-2 py-[2px] text-[0.6rem] uppercase tracking-widest text-faint">
+                      <span className="order-3 inline-block border border-line-strong px-2 py-[2px] text-[0.6rem] uppercase tracking-widest text-seal font-medium">
                         {pick(job.tag)}
                       </span>
                     </div>
+
+                    {/* Right Content Block */}
                     <div className="relative ltr:pl-8 rtl:pr-8 md:ltr:pl-12 md:rtl:pr-12">
-                      <h3 className="text-[1.05rem] font-bold leading-tight tracking-tight">
-                        {pick(job.role)} — <span className="text-[0.85rem] font-normal text-muted">{pick(job.org)}</span>
-                      </h3>
-                      <p className="mt-2 max-w-[64ch] text-sm leading-relaxed text-muted">
-                        {pick(job.bullets[0])}
-                      </p>
+                      {/* Timeline Node Dots */}
+                      <span
+                        className="absolute top-[6px] hidden h-[15px] w-[15px] rounded-full border-2 border-seal bg-bg ltr:-left-[0px] rtl:-right-[0px] md:block md:ltr:left-[-5px] md:rtl:right-[-5px]"
+                        aria-hidden="true"
+                      />
+                      <span
+                        className="absolute top-[6px] h-[15px] w-[15px] rounded-full border-2 border-seal bg-bg ltr:-left-[0.5px] rtl:-right-[0.5px] md:hidden"
+                        aria-hidden="true"
+                      />
+
+                      {/* Header with Click to Expand */}
+                      <div
+                        onClick={() => toggleExpand(i)}
+                        className="cursor-pointer group select-none"
+                      >
+                        <div className="flex items-start justify-between gap-4">
+                          <div>
+                            <h3 className="text-[1.35rem] font-bold leading-tight tracking-tight group-hover:text-seal transition-colors">
+                              {pick(job.role)}
+                            </h3>
+                            <div className="mono mt-2 text-xs uppercase tracking-widest text-muted">
+                              {pick(job.org)} · <span className="text-faint">{pick(job.place)}</span>
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            className="mt-1 grid h-7 w-7 shrink-0 place-items-center border border-line text-sm text-muted group-hover:border-seal group-hover:text-seal transition-colors"
+                            aria-label={isOpen ? "Collapse" : "Expand"}
+                          >
+                            {isOpen ? "−" : "+"}
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Expandable Responsibilities & Metrics */}
+                      <AnimatePresence>
+                        {isOpen && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                            className="overflow-hidden"
+                          >
+                            <ul className="mt-5 space-y-3.5 border-t border-line/60 pt-4">
+                              {job.bullets.map((b, j) => (
+                                <li
+                                  key={j}
+                                  className="relative max-w-[66ch] leading-relaxed text-muted ltr:pl-5 rtl:pr-5 text-[0.92rem]"
+                                >
+                                  <span
+                                    className="absolute top-[0.65em] h-[5px] w-[5px] bg-seal ltr:left-0 rtl:right-0"
+                                    aria-hidden="true"
+                                  />
+                                  {pick(b)}
+                                </li>
+                              ))}
+                            </ul>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                     </div>
                   </article>
-                ) : (
-                <article className="print-avoid-break grid grid-cols-1 gap-4 md:grid-cols-[200px_1fr] md:gap-12">
-                  <div className="mono flex items-start gap-4 text-sm text-muted md:flex-col md:gap-2">
-                    <span className="order-2 md:order-1">
-                      {job.from} — {pick(job.to)}
-                    </span>
-                    <span className="order-1 mt-[5px] inline-block h-[15px] w-[15px] shrink-0 rounded-full border-2 border-seal bg-bg md:order-2 md:hidden" />
-                    <span className="order-3 inline-block border border-line-strong px-2 py-[2px] text-[0.6rem] uppercase tracking-widest text-faint">
-                      {pick(job.tag)}
-                    </span>
-                  </div>
-
-                  <div className="relative ltr:pl-8 rtl:pr-8 md:ltr:pl-12 md:rtl:pr-12">
-                    <span
-                      className="absolute top-[6px] hidden h-[15px] w-[15px] rounded-full border-2 border-seal bg-bg ltr:-left-[0px] rtl:-right-[0px] md:block md:ltr:left-[-5px] md:rtl:right-[-5px]"
-                      aria-hidden="true"
-                    />
-                    <span
-                      className="absolute top-[6px] h-[15px] w-[15px] rounded-full border-2 border-seal bg-bg ltr:-left-[0.5px] rtl:-right-[0.5px] md:hidden"
-                      aria-hidden="true"
-                    />
-                    <h3 className="text-[1.4rem] font-bold leading-tight tracking-tight">
-                      {pick(job.role)}
-                    </h3>
-                    <div className="mono mt-2 text-xs uppercase tracking-widest text-ink/70">
-                      {pick(job.org)} · {pick(job.place)}
-                    </div>
-                    <ul className="mt-5 space-y-3">
-                      {job.bullets.map((b, j) => (
-                        <li key={j} className="relative max-w-[64ch] leading-relaxed text-muted ltr:pl-5 rtl:pr-5">
-                          <span className="absolute top-[0.7em] h-[5px] w-[5px] bg-seal ltr:left-0 rtl:right-0" aria-hidden="true" />
-                          {pick(b)}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </article>
-                )}
-              </Reveal>
-            ))}
+                </Reveal>
+              );
+            })}
           </div>
         </div>
 
-        {/* education — supporting information, kept compact */}
+        {/* Education Section */}
         <Reveal>
-          <h3 className="eyebrow mt-20 mb-6 block border-t border-line pt-10">
-            {t("section.education")}
-          </h3>
+          <div className="mt-20 border-t border-line pt-10">
+            <span className="eyebrow mb-6 block text-faint">{t("section.education")}</span>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              {education.map((edu, i) => (
+                <div
+                  key={i}
+                  className="print-avoid-break border border-line bg-bg p-5 transition-colors hover:border-line-strong"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="mono text-xs text-seal font-semibold">
+                      {edu.from} — {edu.to}
+                    </span>
+                    <span className="mono text-[0.62rem] uppercase tracking-wider text-faint">
+                      {pick(edu.org)}
+                    </span>
+                  </div>
+                  <h4 className="mt-2 text-base font-bold text-ink">{pick(edu.degree)}</h4>
+                  <p className="mt-2 text-xs leading-relaxed text-muted">{pick(edu.note)}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </Reveal>
-        <div className="grid grid-cols-1 gap-x-12 gap-y-4 md:grid-cols-2">
-          {education.map((edu, i) => (
-            <Reveal key={i} delay={i * 0.06} tier="feedback">
-              <div className="print-avoid-break flex flex-wrap items-baseline gap-x-3 gap-y-1 border-b border-line pb-3">
-                <span className="mono text-xs text-faint">{edu.from} — {edu.to}</span>
-                <span className="text-[0.92rem] font-bold">{pick(edu.degree)}</span>
-                <span className="mono text-[0.68rem] uppercase tracking-wider text-muted">{pick(edu.org)}</span>
-              </div>
-            </Reveal>
-          ))}
-        </div>
       </div>
     </section>
   );

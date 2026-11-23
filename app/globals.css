@@ -486,3 +486,66 @@ html[dir="rtl"] .display { transform-origin: right bottom; }
     margin-bottom: 0;
   }
 }
+
+/* ============================================================
+   Browser Surfaces & Polish (Anti-Slop Craft Standards)
+   ============================================================ */
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: 0px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--seal);
+}
+
+/* Accessibility Focus Ring */
+:focus-visible {
+  outline: 2px solid var(--seal);
+  outline-offset: 2px;
+}
+
+/* High-Precision Tabular Figures */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Print-Perfect Swiss A4 Output */
+@media print {
+  body::before,
+  header,
+  #scroll-progress,
+  .no-print,
+  #whatsapp-float,
+  .cmd-palette-trigger {
+    display: none !important;
+  }
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 11pt !important;
+  }
+  .print-avoid-break {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+  .container {
+    max-width: 100% !important;
+    padding: 0 1cm !important;
+  }
+  .border-line,
+  .border-line-strong {
+    border-color: #d0d0cc !important;
+  }
+  .text-muted,
+  .text-faint {
+    color: #444440 !important;
+  }
+}

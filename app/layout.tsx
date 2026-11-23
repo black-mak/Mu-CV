@@ -8,6 +8,7 @@ import Effects from "@/components/Effects";
 import MagicLayer from "@/components/MagicLayer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import SmoothScroll from "@/components/SmoothScroll";
+import CommandPalette from "@/components/CommandPalette";
 import { profile, STUDIO_URL } from "@/lib/data";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -119,6 +120,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main className="pt-[76px]">{children}</main>
           <Footer />
           <WhatsAppFloat />
+          <CommandPalette />
         </I18nProvider>
         {process.env.VERCEL === "1" ? <Analytics /> : null}
       </body>

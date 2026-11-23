@@ -19,6 +19,7 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("");
+  const [muted, setMuted] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -118,6 +119,19 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => {
+              const isM = sound.toggleMute();
+              setMuted(isM);
+              if (!isM) sound.click("pop");
+            }}
+            aria-label={muted ? "Unmute acoustic effects" : "Mute acoustic effects"}
+            className="grid h-10 w-10 place-items-center border border-line-strong text-xs text-muted transition-colors hover:border-ink hover:text-ink"
+            title={muted ? "Unmute sound" : "Mute sound"}
+          >
+            {muted ? "🔇" : "🔊"}
+          </button>
           <ThemeToggle />
           <button
             type="button"
