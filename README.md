@@ -1,6 +1,6 @@
 ﻿# BLACK-MAK  Online CV
 
-### Ã¢â€“Â¶ View the live CV: **https://muhamed-cv.vercel.app**
+### View the live CV: **https://muhamed-cv.vercel.app**
 
 [![View Live CV](https://img.shields.io/badge/View_Live_CV-muhamed--cv.vercel.app-070708?style=for-the-badge&logo=vercel&logoColor=white)](https://muhamed-cv.vercel.app)
 &nbsp;
@@ -8,7 +8,7 @@
 
 ---
 
-Premium bilingual (EN/AR) online rÃƒÂ©sumÃƒÂ© for **Muhamed Alaa (BLACK-MAKÃ‚Â®)** Ã¢â‚¬â€ Senior Graphic &
+Premium bilingual (EN/AR) online rÃƒÂ©sumÃƒÂ© for **Muhamed Alaa (BLACK-MAK Senior Graphic &
 Brand Designer. Built to share the visual DNA of the studio at
 [black-mak.vercel.app](https://black-mak.vercel.app/) and to bridge seamlessly to it:
 *this is the person Ã¢â‚¬â€ the studio holds the work.*
@@ -66,10 +66,10 @@ Vercel project: muhamed-cv (lowercase). Deploy with the repo's deploy.ps1 (token
 
 ## License
 
-Ã‚Â© 2026 Muhamed Alaa (BLACK-MAKÃ‚Â®). **All rights reserved.** This project is
+2026 Muhamed Alaa (BLACK-MAK). **All rights reserved.** This project is
 published under a proprietary license Ã¢â‚¬â€ you may view the code and the live site,
 but reuse, redistribution, or use of the name, photos, and certificates requires
 written permission. See [LICENSE](./LICENSE).
 
 ---
-Ã‚Â© 2026 BLACK-MAKÃ‚Â®. Designed with intent. New Valley, Egypt.
+ 2026 BLACK-MAK. Designed with intent. New Valley, Egypt.
